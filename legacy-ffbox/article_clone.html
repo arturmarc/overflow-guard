@@ -1,0 +1,214 @@
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Redacted+Script:wght@300;400;700&display=swap");
+
+    /** main layout it's just regular flex wrap with min-width on the content column */
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+        gap: 0.5rem;
+    }
+    .content-column {
+        flex: 6;
+        min-width: 135px;
+    }
+    .column {
+        padding: 20px;
+        border-radius: 8px;
+    }
+    .metadata-column {
+        flex: 4;
+        background-color: #2a2454;
+        border: 1px solid #ccadeb;
+    }
+
+    /** each row is a flex with detection will become .-condensed when doesn't fit in one line */
+    .meta-row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    /** condensed version of the row */
+    .meta-row-condensed {
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+    .meta-label {
+        display: block;
+        color: #ccadeb;
+        font-size: 0.75rem;
+        width: 25%;
+    }
+    .meta-value {
+        /** !!! this controls the layout essentially: */
+        /** when it's below this width the row will wrap and become condensed */
+        min-width: 90px;
+        flex: 1 1;
+        display: block;
+        color: #fff;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .meta-row-condensed .meta-value {
+        min-width: none;
+    }
+
+    /** some visual css not related to the example */
+    .meta-heading {
+        font-weight: bold;
+        /** just to make it nicer bad practice: */
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .content-column {
+        background-color: white;
+        color: black;
+        min-height: 16rem;
+        /** just to make it nicer bad practice: */
+        max-height: 270px;
+        overflow: hidden;
+    }
+
+    .container {
+        font-family: Redacted Script;
+        background-color: #25204a;
+        gap: 0.5rem;
+    }
+    .column {
+        padding: 20px;
+        border-radius: 8px;
+    }
+    .metadata-column {
+        flex: 4;
+        background-color: #2a2454;
+        border: 1px solid #ccadeb;
+    }
+
+    /** example related styles */
+    .example {
+        background-color: #121212;
+        color: white;
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        width: 440px;
+        overflow: hidden;
+        resize: both;
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .toggle {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .toggle span {
+        opacity: 0.5;
+    }
+    .toggle span.active {
+        opacity: 1;
+        font-weight: bold;
+        animation: jump 0.5s ease-in-out;
+    }
+
+    .resize-info {
+        width: 100%;
+        padding-top: 24px;
+        margin-bottom: -20px;
+        margin-right: -20px;
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    @keyframes jump {
+        0% {
+            scale: 1.2;
+            color: rgb(169, 169, 128);
+        }
+        100% {
+            scale: 1;
+        }
+    }
+</style>
+
+<div class="example">
+    <div class="toggle">
+        <span class="sparse-toggle active">Sparse</span>
+        <span class="condensed-toggle active">Condensed</span>
+    </div>
+
+    <div class="container">
+        <div class="column metadata-column" data-layout="sparse">
+            <div class="meta-heading">Subject line here</div>
+            <flex-wrap-detector wrapped-class="meta-row-condensed">
+                <div class="meta-row" id="meta-row-to-check">
+                    <span class="meta-label">From:</span>
+                    <span class="meta-value">Josh Comeau</span>
+                </div>
+            </flex-wrap-detector>
+            <flex-wrap-detector wrapped-class="meta-row-condensed">
+                <div class="meta-row">
+                    <span class="meta-label">Reply:</span>
+                    <span class="meta-value">Josh@email.com</span>
+                </div>
+            </flex-wrap-detector>
+            <flex-wrap-detector wrapped-class="meta-row-condensed">
+                <div class="meta-row">
+                    <span class="meta-label">Date:</span>
+                    <span class="meta-value">January 1</span>
+                </div>
+            </flex-wrap-detector>
+        </div>
+        <div class="column content-column">
+            <p>
+                Voluptate dolore fugiat ullamco nulla nostrud in anim excepteur duis. Excepteur nostrud consectetur irure adipisicing dolor.
+            </p>
+            <p>
+                Minim aliquip ut excepteur adipisicing laboris. Occaecat commodo adipisicing occaecat adipisicing.
+            </p>
+        </div>
+    </div>
+
+    <div class="resize-info">resize here:👉</div>
+</div>
+
+<script>
+    const metaRowEl = document.querySelector("#meta-row-to-check");
+    const sparseToggle = document.querySelector(".sparse-toggle");
+    const condensedToggle = document.querySelector(".condensed-toggle");
+    console.log(metaRowEl);
+
+    const resizeObserver = new ResizeObserver(() => {
+        const condensed = metaRowEl
+            .classList
+            .contains("meta-row-condensed");
+        if (condensed) {
+            condensedToggle
+                .classList
+                .add("active");
+            sparseToggle
+                .classList
+                .remove("active");
+        } else {
+            sparseToggle
+                .classList
+                .add("active");
+            condensedToggle
+                .classList
+                .remove("active");
+        }
+    });
+
+    const exampleEl = document.querySelector(".example");
+    resizeObserver.observe(exampleEl);
+</script>
