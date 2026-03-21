@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useState } from 'react'
 
 import {
   ArrowRight,
@@ -31,6 +32,7 @@ export type ExampleDefinition = {
   title: string
   description: string
   mode: 'fallback' | 'render-prop' | 'mixed'
+  level: 'core' | 'advanced'
   previewHeightClassName?: string
   component: ReactNode
   code: string
@@ -47,7 +49,7 @@ function StatusPill({
     <div className="flex items-center gap-2 text-xs text-muted-foreground">
       <span
         className={cn(
-          'inline-flex items-center rounded-full border px-2 py-1 font-medium',
+          'inline-flex items-center rounded-full border px-2 py-1 font-medium whitespace-nowrap',
           isOverflowing
             ? 'border-primary/30 bg-primary/10 text-primary'
             : 'border-border bg-background text-muted-foreground',
@@ -82,7 +84,7 @@ function BasicLayoutExample() {
   return (
     <OverflowGuard>
       {(isOverflowing, overflowAxis) => (
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           <StatusPill
             isOverflowing={isOverflowing}
             overflowAxis={overflowAxis}
@@ -118,13 +120,20 @@ function BasicLayoutExample() {
   )
 }
 
-function ButtonsFallbackExample() {
-  const primary = (
-    <div className="flex flex-nowrap gap-2">
+export function AdaptiveToolbarExample() {
+  const [showExtraAction, setShowExtraAction] = useState(false)
+  const fullSizeActions = (
+    <>
       <Button className="shrink-0" variant="outline">
         <Search />
         Search
       </Button>
+      {showExtraAction ? (
+        <Button className="shrink-0" variant="outline">
+          <FileText />
+          Export brief
+        </Button>
+      ) : null}
       <Button className="shrink-0" variant="outline">
         <Send />
         Share update
@@ -133,40 +142,84 @@ function ButtonsFallbackExample() {
         <Sparkles />
         Launch flow
       </Button>
-    </div>
+    </>
   )
 
-  const fallback = (
-    <div className="flex items-center justify-end gap-2">
+  const compactActions = (
+    <>
       <IconButton icon={<Search />} label="Search" />
+      {showExtraAction ? (
+        <IconButton icon={<FileText />} label="Export brief" />
+      ) : null}
       <IconButton icon={<Send />} label="Share update" />
       <IconButton icon={<Sparkles />} label="Launch flow" />
-    </div>
+    </>
   )
 
   return (
-    <div className="space-y-3">
-      <div className="text-xs text-muted-foreground">
-        <span className="font-medium text-foreground">fallbackOn="horizontal"</span>{' '}
-        keeps the full buttons until the row no longer fits.
-      </div>
-      <OverflowGuard fallback={fallback} fallbackOn="horizontal">
-        {primary}
-      </OverflowGuard>
-    </div>
+    <OverflowGuard>
+      {(isOverflowing, overflowAxis) => (
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-col gap-2">
+              <div className="text-sm font-semibold">Project actions</div>
+              <div className="text-xs text-muted-foreground">
+                Toggling extra content can trigger the same overflow response as
+                resizing.
+              </div>
+              <div>
+                <Button
+                  size="sm"
+                  onClick={() => setShowExtraAction((current) => !current)}
+                >
+                  {showExtraAction ? 'Hide extra button' : 'Show extra button'}
+                </Button>
+              </div>
+            </div>
+            <StatusPill
+              isOverflowing={isOverflowing}
+              overflowAxis={overflowAxis}
+            />
+          </div>
+          <div
+            className={cn(
+              'flex  min-w-max gap-2 rounded-[1.4rem] border bg-card p-2 shadow-sm',
+              isOverflowing && 'flex-wrap',
+            )}
+          >
+            <div className="flex items-center gap-3 rounded-[1rem] bg-muted/70 px-3 py-3">
+              <div className="rounded-full bg-primary/12 p-2 text-primary">
+                <FolderKanban className="size-4" />
+              </div>
+              <div className="text-sm font-semibold whitespace-nowrap">
+                Sprint planning
+              </div>
+            </div>
+            <div
+              className={cn(
+                'flex gap-2 flex-1 items-center',
+                isOverflowing ? 'justify-end' : 'justify-center',
+              )}
+            >
+              {isOverflowing ? compactActions : fullSizeActions}
+            </div>
+          </div>
+        </div>
+      )}
+    </OverflowGuard>
   )
 }
 
-function MenuFallbackExample() {
+export function MenuFallbackExample() {
   const primary = (
-    <nav className="flex items-center justify-between gap-3 rounded-[1.4rem] border bg-card px-4 py-3">
-      <div className="flex min-w-0 items-center gap-2 text-sm font-semibold">
+    <nav className="flex min-w-max items-center justify-between gap-3 rounded-[1.4rem] border bg-card px-4 py-3">
+      <div className="flex items-center gap-2 text-sm font-semibold">
         <div className="rounded-full bg-primary/12 p-2 text-primary">
           <LayoutPanelLeft className="size-4" />
         </div>
         OverflowGuard
       </div>
-      <div className="flex flex-nowrap items-center gap-2 text-sm">
+      <div className="flex flex-nowrap items-center gap-2 text-sm pl-2 shrink-0">
         {['Docs', 'Recipes', 'Playground', 'Pricing'].map((item) => (
           <a
             key={item}
@@ -198,15 +251,15 @@ function MenuFallbackExample() {
   return <OverflowGuard fallback={fallback}>{primary}</OverflowGuard>
 }
 
-function ReadMoreExample() {
+export function ReadMoreExample() {
   return (
-    <OverflowGuard className="h-52">
+    <OverflowGuard className="h-full" containerClassName='h-full'>
       {(isOverflowing, overflowAxis) => {
         const showReadMore =
           overflowAxis === 'vertical' || overflowAxis === 'both'
 
         return (
-          <article className="flex h-full flex-col rounded-[1.6rem] border bg-card p-5 shadow-sm">
+          <article className="flex min-h-full flex-col rounded-[1.6rem] border bg-card p-10 shadow-sm">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
                 <div className="text-sm font-semibold">Release notes draft</div>
@@ -219,7 +272,7 @@ function ReadMoreExample() {
                 overflowAxis={overflowAxis}
               />
             </div>
-            <div className="relative min-h-0 flex-1">
+            <div className="relative flex-1">
               <p
                 className={cn(
                   'pr-2 text-sm leading-6 text-muted-foreground',
@@ -282,7 +335,7 @@ function NestedUsageExample() {
   return (
     <OverflowGuard className="w-full">
       {(shellOverflowing, shellAxis) => (
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           <StatusPill
             isOverflowing={shellOverflowing}
             overflowAxis={shellAxis}
@@ -311,7 +364,7 @@ function NestedUsageExample() {
               containerClassName="min-w-0 flex-1"
             >
               {(actionsOverflowing) => (
-                <div className="space-y-3">
+                <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between gap-3">
                     <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                       Inner guard
@@ -367,8 +420,9 @@ export const exampleRegistry: ExampleDefinition[] = [
     id: 'basic-layout-switch',
     title: 'Basic layout switch',
     description:
-      'A row of feature tiles flips into a column and reports the detected overflow axis.',
+      'A row of feature tiles flips into a column once the content no longer fits in one line.',
     mode: 'render-prop',
+    level: 'core',
     previewHeightClassName: 'min-h-[14rem]',
     component: <BasicLayoutExample />,
     code: String.raw`<OverflowGuard>
@@ -381,36 +435,49 @@ export const exampleRegistry: ExampleDefinition[] = [
 </OverflowGuard>`,
   },
   {
-    id: 'buttons-to-icons',
-    title: 'Buttons compress to icons',
+    id: 'adaptive-toolbar',
+    title: 'Toolbar adapts in place',
     description:
-      'The fallback shortcut swaps full buttons for icon-only controls once the toolbar overflows horizontally.',
-    mode: 'fallback',
-    previewHeightClassName: 'min-h-[11rem]',
-    component: <ButtonsFallbackExample />,
-    code: String.raw`<OverflowGuard
-  fallbackOn="horizontal"
-  fallback={
-    <div className="flex items-center gap-2">
-      <IconButton icon={<Search />} label="Search" />
-      <IconButton icon={<Send />} label="Share update" />
-      <IconButton icon={<Sparkles />} label="Launch flow" />
-    </div>
-  }
->
-  <div className="flex flex-nowrap gap-2">
-    <Button variant="outline"><Search />Search</Button>
-    <Button variant="outline"><Send />Share update</Button>
-    <Button><Sparkles />Launch flow</Button>
-  </div>
-</OverflowGuard>`,
+      'A header keeps one component tree and swaps between full actions and compact controls when size or content changes push it over the edge.',
+    mode: 'render-prop',
+    level: 'core',
+    previewHeightClassName: 'min-h-[14rem]',
+    component: <AdaptiveToolbarExample />,
+    code: String.raw`function ProjectActions() {
+  const [showExtraAction, setShowExtraAction] = useState(false)
+
+  return (
+    <OverflowGuard>
+      {(isOverflowing) => (
+        <div className="flex flex-col gap-3">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setShowExtraAction((current) => !current)}
+          >
+            {showExtraAction ? "Hide extra button" : "Show extra button"}
+          </Button>
+          <div className={isOverflowing ? "flex flex-wrap gap-2" : "flex gap-2"}>
+            <ProjectSummary />
+            {isOverflowing ? (
+              <ActionIcons showExtra={showExtraAction} />
+            ) : (
+              <ActionButtons showExtra={showExtraAction} />
+            )}
+          </div>
+        </div>
+      )}
+    </OverflowGuard>
+  )
+}`,
   },
   {
     id: 'menu-to-hamburger',
     title: 'Menu collapses to hamburger',
     description:
-      'The primary navigation stays fully visible until the fallback replacement is actually needed.',
+      'Fallback mode is still available when the compact state should be a different tree entirely.',
     mode: 'fallback',
+    level: 'advanced',
     previewHeightClassName: 'min-h-[11rem]',
     component: <MenuFallbackExample />,
     code: String.raw`<OverflowGuard
@@ -423,7 +490,7 @@ export const exampleRegistry: ExampleDefinition[] = [
     </nav>
   }
 >
-  <nav className="flex items-center justify-between rounded-3xl border bg-card px-4 py-3">
+  <nav className="flex min-w-max items-center justify-between rounded-3xl border bg-card px-4 py-3">
     <Brand />
     <div className="flex flex-nowrap gap-2">
       <NavLink>Docs</NavLink>
@@ -438,8 +505,9 @@ export const exampleRegistry: ExampleDefinition[] = [
     id: 'read-more',
     title: 'Read more appears on height overflow',
     description:
-      'A fixed-height article card uses the runtime axis signal to reveal a vertical overflow affordance.',
+      'Axis-aware adaptation becomes useful once you want to react differently to vertical overflow.',
     mode: 'render-prop',
+    level: 'advanced',
     previewHeightClassName: 'min-h-[20rem]',
     component: <ReadMoreExample />,
     code: String.raw`<OverflowGuard className="h-52">
@@ -448,7 +516,7 @@ export const exampleRegistry: ExampleDefinition[] = [
       overflowAxis === "vertical" || overflowAxis === "both"
 
     return (
-      <article className="flex h-full flex-col rounded-3xl border bg-card p-5">
+      <article className="flex h-full min-h-max flex-col rounded-3xl border bg-card p-5">
         <div className={showReadMore ? "max-h-24 overflow-hidden" : ""}>
           <LongArticleCopy />
         </div>
@@ -462,8 +530,9 @@ export const exampleRegistry: ExampleDefinition[] = [
     id: 'nested-usage',
     title: 'Nested shell and toolbar',
     description:
-      'The outer guard changes the overall shell layout while the inner guard independently compresses the action set.',
+      'Multiple guards can coordinate when one layout shift is not enough for the full surface.',
     mode: 'mixed',
+    level: 'advanced',
     previewHeightClassName: 'min-h-[18rem]',
     component: <NestedUsageExample />,
     code: String.raw`<OverflowGuard className="w-full">
@@ -480,6 +549,14 @@ export const exampleRegistry: ExampleDefinition[] = [
 </OverflowGuard>`,
   },
 ]
+
+export const coreExamples = exampleRegistry.filter(
+  (example) => example.level === 'core',
+)
+
+export const advancedExamples = exampleRegistry.filter(
+  (example) => example.level === 'advanced',
+)
 
 export const publicApiSnippets = {
   fallback: String.raw`type OverflowGuardFallbackProps = {
@@ -498,35 +575,26 @@ export const publicApiSnippets = {
 }
 
 export const usageHighlights = [
-  'Use `fallback` when the overflowing state should swap in a replacement tree.',
-  'Use the render prop when the overflowing state should adapt the same view in place.',
-  'Call `useOverflowGuard()` inside descendants when nested content only needs the boolean state.',
+  'Start with the render prop when the compact state is still the same UI, just arranged differently.',
+  'Keep the measured version structurally honest so the visible version reflects what actually needs to fit.',
+  'Reach for `fallback` when the overflow state should be a different interaction pattern, not just a tighter layout.',
   'Use `containerClassName` or `containerStyle` when the outer measuring wrapper needs layout constraints.',
 ]
 
 export const demoStats = [
   { label: 'Examples', value: exampleRegistry.length.toString() },
-  { label: 'Modes', value: 'fallback + render' },
-  { label: 'Axis signal', value: 'runtime' },
-  { label: 'Layout', value: 'all live' },
+  { label: 'Starting point', value: 'render prop' },
+  { label: 'Signal', value: 'content fit' },
+  { label: 'Previews', value: 'all live' },
 ]
 
-export const featureBadges = [
-  'render prop',
-  'fallback prop',
-  'runtime axis',
-  'nested composition',
-]
-
-export const heroCode = String.raw`import { OverflowGuard } from "@/components/overflow-guard"
-
-<OverflowGuard fallbackOn="horizontal" fallback={<CompactActions />}>
-  <FullActions />
-</OverflowGuard>
+export const heroCode = String.raw`import { OverflowGuard } from "@overflow-guard/react"
 
 <OverflowGuard>
-  {(isOverflowing, overflowAxis) => (
-    <Toolbar data-axis={overflowAxis} compact={isOverflowing} />
+  {(isOverflowing) => (
+    <Toolbar
+      compact={isOverflowing}
+    />
   )}
 </OverflowGuard>`
 

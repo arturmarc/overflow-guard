@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -46,63 +47,16 @@ export type OverflowGuardProps = FallbackModeProps | RenderPropModeProps
 
 type OverflowGuardContextValue = {
   isOverflowing: boolean
+  overflowAxis?: OverflowAxis
 }
 
 const OverflowGuardContext = createContext<OverflowGuardContextValue>({
   isOverflowing: false,
+  overflowAxis: 'none',
 })
-
-export function resolveOverflowAxis(
-  horizontalOverflow: boolean,
-  verticalOverflow: boolean,
-): OverflowAxis {
-  if (horizontalOverflow && verticalOverflow) {
-    return 'both'
-  }
-
-  if (horizontalOverflow) {
-    return 'horizontal'
-  }
-
-  if (verticalOverflow) {
-    return 'vertical'
-  }
-
-  return 'none'
-}
-
-export function shouldUseFallback(
-  fallbackOn: FallbackOn,
-  overflowAxis: OverflowAxis,
-) {
-  if (overflowAxis === 'none') {
-    return false
-  }
-
-  if (fallbackOn === 'both') {
-    return true
-  }
-
-  return overflowAxis === fallbackOn || overflowAxis === 'both'
-}
 
 export function useOverflowGuard() {
   return useContext(OverflowGuardContext).isOverflowing
-}
-
-function getDomProps(props: OverflowGuardProps): HTMLAttributes<HTMLDivElement> {
-  const domProps = { ...props } as Record<string, unknown>
-
-  delete domProps.children
-  delete domProps.className
-  delete domProps.containerClassName
-  delete domProps.containerStyle
-  delete domProps.fallback
-  delete domProps.fallbackOn
-  delete domProps.style
-  delete domProps.throttleTime
-
-  return domProps as HTMLAttributes<HTMLDivElement>
 }
 
 export function OverflowGuard(props: OverflowGuardProps) {
@@ -175,6 +129,12 @@ export function OverflowGuard(props: OverflowGuardProps) {
     scheduleOverflowCheck()
   }, [scheduleOverflowCheck])
 
+  useLayoutEffect(() => {
+    checkOverflow()
+  })
+
+  console.log("rendering");
+
   const renderCountRef = useRef(0)
   const lastResetTimeRef = useRef(0)
 
@@ -244,7 +204,7 @@ export function OverflowGuard(props: OverflowGuardProps) {
     >
       <div
         aria-hidden="true"
-        data-overflow-guard="measurement-layer"
+        data-overflow-guard="hidden-measurement-layer"
         style={{
           position: 'absolute',
           inset: 0,
@@ -257,29 +217,73 @@ export function OverflowGuard(props: OverflowGuardProps) {
         <div
           {...domProps}
           ref={setMeasurementBoxRef}
-          data-overflow-guard="measurement-box"
+          data-overflow-guard="hidden-measurement-box"
           className={className}
           style={sharedVisibleStyle}
         >
-          <OverflowGuardContext.Provider value={{ isOverflowing: false }}>
+          <OverflowGuardContext.Provider value={{ isOverflowing: false, overflowAxis: 'none' }}>
             {measurementChildren}
           </OverflowGuardContext.Provider>
         </div>
       </div>
       <div
-        data-overflow-guard={`visible-${overflowAxis}`}
+        data-overflow-guard={`visible-layer-${overflowAxis}`}
         style={{
           gridArea: '1 / 1',
           minWidth: 0,
           minHeight: 0,
         }}
       >
-        <div {...domProps} className={className} style={sharedVisibleStyle}>
-          <OverflowGuardContext.Provider value={{ isOverflowing }}>
+        <div {...domProps} className={className} style={sharedVisibleStyle} data-overflow-guard="visible-box">
+          <OverflowGuardContext.Provider value={{ isOverflowing, overflowAxis }}>
             {visibleChildren}
           </OverflowGuardContext.Provider>
         </div>
       </div>
     </div>
   )
+}
+
+function resolveOverflowAxis(
+  horizontalOverflow: boolean,
+  verticalOverflow: boolean,
+): OverflowAxis {
+  if (horizontalOverflow && verticalOverflow) {
+    return 'both'
+  }
+  if (horizontalOverflow) {
+    return 'horizontal'
+  }
+  if (verticalOverflow) {
+    return 'vertical'
+  }
+  return 'none'
+}
+
+function shouldUseFallback(
+  fallbackOn: FallbackOn,
+  overflowAxis: OverflowAxis,
+) {
+  if (overflowAxis === 'none') {
+    return false
+  }
+  if (fallbackOn === 'both') {
+    return true
+  }
+  return overflowAxis === fallbackOn || overflowAxis === 'both'
+}
+
+function getDomProps(props: OverflowGuardProps): HTMLAttributes<HTMLDivElement> {
+  const domProps = { ...props } as Record<string, unknown>
+
+  delete domProps.children
+  delete domProps.className
+  delete domProps.containerClassName
+  delete domProps.containerStyle
+  delete domProps.fallback
+  delete domProps.fallbackOn
+  delete domProps.style
+  delete domProps.throttleTime
+
+  return domProps as HTMLAttributes<HTMLDivElement>
 }

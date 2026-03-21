@@ -1,0 +1,30 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="64"
+  height="64"
+  viewBox="0 0 64 64"
+  role="img"
+  aria-labelledby="title"
+>
+  <title>Overflowing box favicon</title>
+  <rect
+    x="4"
+    y="8"
+    width="34"
+    height="48"
+    rx="3"
+    fill="#ffffff"
+    stroke="#222"
+    stroke-width="3.5"
+  />
+  <rect
+    x="24"
+    y="22"
+    width="34"
+    height="18"
+    rx="2.5"
+    fill="#ef476f"
+    stroke="#222"
+    stroke-width="2.25"
+  />
+</svg>

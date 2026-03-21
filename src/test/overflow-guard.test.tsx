@@ -1,4 +1,4 @@
-import { cleanup, render, screen, within } from '@testing-library/react'
+import { cleanup, render } from '@testing-library/react'
 import { act } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -9,7 +9,12 @@ import {
   useOverflowGuard,
 } from '@/components/overflow-guard'
 
-type ResizeCallback = (size: { width?: number; height?: number }) => void
+type ResizeCallbackSize = {
+  width?: number
+  height?: number
+}
+
+type ResizeCallback = (size: ResizeCallbackSize) => void
 
 let resizeCallbacks: ResizeCallback[] = []
 const originalRequestAnimationFrame = globalThis.requestAnimationFrame
@@ -30,9 +35,9 @@ function setMeasurementBoxSize(size: {
   scrollWidth: number
   scrollHeight: number
 }) {
-  const measurementBox = document.querySelector(
+  const measurementBox = document.querySelector<HTMLDivElement>(
     '[data-overflow-guard="measurement-box"]',
-  ) as HTMLDivElement | null
+  )
 
   if (!measurementBox) {
     throw new Error('Measurement box not found')
@@ -55,9 +60,9 @@ function triggerResize() {
 }
 
 function getVisibleLayer() {
-  const visibleLayer = document.querySelector(
+  const visibleLayer = document.querySelector<HTMLElement>(
     '[data-overflow-guard^="visible-"]',
-  ) as HTMLElement | null
+  )
 
   if (!visibleLayer) {
     throw new Error('Visible layer not found')
@@ -100,7 +105,7 @@ describe('OverflowGuard component', () => {
   })
 
   it('renders fallback when horizontal overflow matches fallbackOn', () => {
-    render(
+    const { getByText, queryByText } = render(
       <OverflowGuard fallback={<div>compact</div>} fallbackOn="horizontal">
         <div>primary</div>
       </OverflowGuard>,
@@ -114,14 +119,12 @@ describe('OverflowGuard component', () => {
     })
     triggerResize()
 
-    const visibleLayer = within(getVisibleLayer())
-
-    expect(visibleLayer.getByText('compact')).toBeInTheDocument()
-    expect(visibleLayer.queryByText('primary')).not.toBeInTheDocument()
+    expect(getVisibleLayer()).toContainElement(getByText('compact'))
+    expect(queryByText('primary')).not.toBeInTheDocument()
   })
 
   it('keeps primary content when overflow is only vertical but fallbackOn is horizontal', () => {
-    render(
+    const { getByText, queryByText } = render(
       <OverflowGuard fallback={<div>compact</div>} fallbackOn="horizontal">
         <div>primary</div>
       </OverflowGuard>,
@@ -135,14 +138,12 @@ describe('OverflowGuard component', () => {
     })
     triggerResize()
 
-    const visibleLayer = within(getVisibleLayer())
-
-    expect(visibleLayer.getByText('primary')).toBeInTheDocument()
-    expect(visibleLayer.queryByText('compact')).not.toBeInTheDocument()
+    expect(getVisibleLayer()).toContainElement(getByText('primary'))
+    expect(queryByText('compact')).not.toBeInTheDocument()
   })
 
   it('passes the runtime overflow axis into the render prop', () => {
-    render(
+    const { getByText } = render(
       <OverflowGuard>
         {(isOverflowing, overflowAxis) => (
           <div>
@@ -160,7 +161,7 @@ describe('OverflowGuard component', () => {
     })
     triggerResize()
 
-    expect(screen.getByText('true / both')).toBeInTheDocument()
+    expect(getByText('true / both')).toBeInTheDocument()
   })
 
   it('exposes the boolean overflow state through the hook', () => {
@@ -170,7 +171,7 @@ describe('OverflowGuard component', () => {
       return <div>{isOverflowing ? 'overflowing' : 'stable'}</div>
     }
 
-    render(
+    const { getByText } = render(
       <OverflowGuard>
         {() => <HookConsumer />}
       </OverflowGuard>,
@@ -184,6 +185,6 @@ describe('OverflowGuard component', () => {
     })
     triggerResize()
 
-    expect(screen.getByText('overflowing')).toBeInTheDocument()
+    expect(getByText('overflowing')).toBeInTheDocument()
   })
 })
