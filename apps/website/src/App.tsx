@@ -13,6 +13,18 @@ type InstallCardProps = {
   command: string
 }
 
+function GitHubIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="h-5 w-5 fill-current"
+    >
+      <path d="M12 0.5C5.37 0.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.38 0.6 0.1 0.82-0.26 0.82-0.58 0-0.28-0.01-1.04-0.02-2.04-3.34 0.73-4.04-1.61-4.04-1.61-0.54-1.39-1.33-1.76-1.33-1.76-1.09-0.75 0.08-0.73 0.08-0.73 1.2 0.08 1.84 1.24 1.84 1.24 1.08 1.84 2.82 1.31 3.5 1 0.11-0.78 0.42-1.31 0.76-1.61-2.66-0.3-5.47-1.33-5.47-5.93 0-1.31 0.47-2.38 1.24-3.22-0.13-0.3-0.54-1.52 0.12-3.16 0 0 1.01-0.32 3.3 1.23 0.96-0.27 1.98-0.4 3-0.4s2.04 0.14 3 0.4c2.29-1.55 3.29-1.23 3.29-1.23 0.67 1.64 0.25 2.86 0.12 3.16 0.77 0.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92 0.43 0.38 0.82 1.1 0.82 2.22 0 1.61-0.01 2.91-0.01 3.3 0 0.32 0.22 0.69 0.83 0.57C20.57 22.29 24 17.79 24 12.5 24 5.87 18.63 0.5 12 0.5z" />
+    </svg>
+  )
+}
+
 function InstallCard({ command }: InstallCardProps) {
   const [copied, setCopied] = useState(false)
 
@@ -23,12 +35,17 @@ function InstallCard({ command }: InstallCardProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2 rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3">
-      <div className="group flex items-start justify-between gap-3">
-        <div className="overflow-x-auto">
-          <div className="inline-flex min-w-max items-center gap-2.5 font-mono text-sm text-foreground/65">
+    <div className="flex min-w-0 max-w-full flex-col gap-2 rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3">
+      <div className="group flex min-w-0 items-center justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <div
+            className="flex min-w-0 items-center gap-2.5 overflow-hidden font-mono text-sm text-foreground/65"
+            title={command}
+          >
             <span className="select-none text-foreground/65">$</span>
-            {command}
+            <span className="min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
+              {command}
+            </span>
           </div>
         </div>
         <Button
@@ -106,36 +123,41 @@ function App() {
     <main className="mx-auto flex max-w-3xl flex-col gap-14 px-6 py-10 md:py-16">
       {/* Hero */}
       <section className="flex flex-col gap-6">
-        <div className="flex justify-end">
+        <div className="flex items-center justify-between gap-4">
+          <img
+            src="/favicon.svg"
+            alt="Overflow Guard logo"
+            className="h-9 w-9 shrink-0"
+          />
           <a
             href="https://github.com/arturmarc/overflow-guard"
-            className="text-sm font-medium text-muted-foreground transition hover:text-foreground"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition hover:bg-white/[0.04] hover:text-foreground"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub repository"
           >
-            GitHub
+            <GitHubIcon />
           </a>
         </div>
-        <h1 className="text-4xl font-semibold leading-[1.2] text-center md:text-[3.25rem]">
-          <code className="rounded-lg bg-primary/15 px-2.5 py-1 font-mono font-semibold text-primary">
-            &lt;OverflowGuard&gt;
-          </code>{' '}<br />
-          enables building around content, not breakpoints
-        </h1>
-        <div>
+        <div className="flex flex-col gap-4">
+          <h1 className="text-4xl font-semibold leading-[1.2] text-center md:text-[3.25rem]">
+            <code className="rounded-lg bg-primary/15 px-2.5 py-1 font-mono font-semibold text-primary">
+              &lt;OverflowGuard&gt;
+            </code>{' '}<br />
+            enables building around content, not breakpoints
+          </h1>
           <p className="max-w-2xl text-xl leading-relaxed text-justify text-foreground/80 md:text-2xl md:leading-relaxed">
             Allows your components to adapt to their content, not the
             viewport. No media or container queries. No magic pixel values.
           </p>
         </div>
         <div className="flex justify-end">
-          <div className="grid max-w-full items-start gap-4 md:grid-cols-2">
-            <div className="flex flex-col gap-2">
+          <div className="grid w-full max-w-full items-start gap-4 md:grid-cols-2">
+            <div className="flex min-w-0 flex-col gap-2">
               <p className="font-medium text-foreground/75">for you</p>
               <InstallCard command="npm i overflow-guard-react" />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex min-w-0 flex-col gap-2">
               <p className="text-md font-medium text-foreground/75">
                 ..and for your{' '}
                 <em className="font-semibold text-primary not-italic">

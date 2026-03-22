@@ -126,7 +126,7 @@ export function AdaptiveToolbarExample() {
     <>
       <Button className="shrink-0" variant="outline">
         <Search />
-        Search
+        Search documents
       </Button>
       {showExtraAction ? (
         <Button className="shrink-0" variant="outline">
