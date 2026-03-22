@@ -1,6 +1,17 @@
 {
   "name": "overflow-guard",
   "private": true,
+  "description": "Monorepo for the overflow-guard React library and example website.",
+  "license": "MIT",
+  "author": "Artur Marczyk",
+  "keywords": [
+    "react",
+    "overflow",
+    "responsive",
+    "layout",
+    "ui",
+    "components"
+  ],
   "type": "module",
   "workspaces": [
     "packages/*",
