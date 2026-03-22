@@ -4,6 +4,15 @@
   "description": "React components and hooks for switching UI when content overflows its available space.",
   "license": "MIT",
   "author": "Artur Marczyk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arturmarc/overflow-guard.git",
+    "directory": "packages/overflow-guard-react"
+  },
+  "homepage": "https://github.com/arturmarc/overflow-guard/tree/main/packages/overflow-guard-react#readme",
+  "bugs": {
+    "url": "https://github.com/arturmarc/overflow-guard/issues"
+  },
   "keywords": [
     "react",
     "overflow",

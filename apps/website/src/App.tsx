@@ -108,7 +108,7 @@ function App() {
       <section className="flex flex-col gap-6">
         <div className="flex justify-end">
           <a
-            href="#"
+            href="https://github.com/arturmarc/overflow-guard"
             className="text-sm font-medium text-muted-foreground transition hover:text-foreground"
             target="_blank"
             rel="noopener noreferrer"
@@ -142,7 +142,7 @@ function App() {
                   agent
                 </em>
               </p>
-              <InstallCard command="npx skills add https://github.com/your-org/overflow-guard --skill overflow-guard" />
+              <InstallCard command="npx skills add https://github.com/arturmarc/overflow-guard --skill overflow-guard" />
             </div>
           </div>
         </div>

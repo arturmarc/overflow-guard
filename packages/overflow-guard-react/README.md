@@ -2,6 +2,8 @@
 
 `overflow-guard-react` lets components react to their actual content size instead of viewport or container breakpoints.
 
+Repository: <https://github.com/arturmarc/overflow-guard>
+
 Wrap a piece of UI in `<OverflowGuard>`, and it tells you when the content stops fitting. You can then swap layouts, collapse actions, reveal a "Read more" affordance, or render a completely different fallback tree.
 
 ## Why use it

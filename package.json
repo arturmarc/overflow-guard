@@ -4,6 +4,14 @@
   "description": "Monorepo for the overflow-guard React library and example website.",
   "license": "MIT",
   "author": "Artur Marczyk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arturmarc/overflow-guard.git"
+  },
+  "homepage": "https://github.com/arturmarc/overflow-guard",
+  "bugs": {
+    "url": "https://github.com/arturmarc/overflow-guard/issues"
+  },
   "keywords": [
     "react",
     "overflow",
@@ -12,6 +20,7 @@
     "ui",
     "components"
   ],
+  "packageManager": "bun@1.2.21",
   "type": "module",
   "workspaces": [
     "packages/*",

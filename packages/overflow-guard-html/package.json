@@ -2,5 +2,14 @@
   "name": "overflow-guard-html",
   "version": "0.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arturmarc/overflow-guard.git",
+    "directory": "packages/overflow-guard-html"
+  },
+  "homepage": "https://github.com/arturmarc/overflow-guard/tree/main/packages/overflow-guard-html#readme",
+  "bugs": {
+    "url": "https://github.com/arturmarc/overflow-guard/issues"
+  },
   "type": "module"
 }
