@@ -11,7 +11,7 @@ import {
 } from 'react'
 import useResizeObserver from 'use-resize-observer'
 
-import { throttle } from '@/lib/throttle'
+import { resolveOverflowAxis, shouldUseFallback, throttle } from './utils'
 
 const DEFAULT_THROTTLE_TIME = 0
 const LOOP_TIME_WINDOW = 300
@@ -133,8 +133,6 @@ export function OverflowGuard(props: OverflowGuardProps) {
     checkOverflow()
   })
 
-  console.log("rendering");
-
   const renderCountRef = useRef(0)
   const lastResetTimeRef = useRef(0)
 
@@ -242,35 +240,6 @@ export function OverflowGuard(props: OverflowGuardProps) {
       </div>
     </div>
   )
-}
-
-function resolveOverflowAxis(
-  horizontalOverflow: boolean,
-  verticalOverflow: boolean,
-): OverflowAxis {
-  if (horizontalOverflow && verticalOverflow) {
-    return 'both'
-  }
-  if (horizontalOverflow) {
-    return 'horizontal'
-  }
-  if (verticalOverflow) {
-    return 'vertical'
-  }
-  return 'none'
-}
-
-function shouldUseFallback(
-  fallbackOn: FallbackOn,
-  overflowAxis: OverflowAxis,
-) {
-  if (overflowAxis === 'none') {
-    return false
-  }
-  if (fallbackOn === 'both') {
-    return true
-  }
-  return overflowAxis === fallbackOn || overflowAxis === 'both'
 }
 
 function getDomProps(props: OverflowGuardProps): HTMLAttributes<HTMLDivElement> {

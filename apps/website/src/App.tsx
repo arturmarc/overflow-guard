@@ -133,7 +133,7 @@ function App() {
           <div className="grid max-w-full items-start gap-4 md:grid-cols-2">
             <div className="flex flex-col gap-2">
               <p className="font-medium text-foreground/75">for you</p>
-              <InstallCard command="npm i @overflow-guard/react" />
+              <InstallCard command="npm i overflow-guard-react" />
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-md font-medium text-foreground/75">

@@ -10,7 +10,14 @@ import { defineConfig, globalIgnores } from "eslint/config";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig([
-  globalIgnores(["dist", "legacy-ffbox"]),
+  globalIgnores([
+    "dist",
+    "**/dist",
+    "legacy-ffbox",
+    "apps/**/vite.config.ts",
+    "packages/**/vite.config.ts",
+    "packages/**/vitest.config.ts",
+  ]),
   {
     files: ["**/*.{ts,tsx}"],
     extends: [

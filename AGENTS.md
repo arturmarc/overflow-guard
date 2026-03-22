@@ -24,3 +24,4 @@ Repository-level instructions for agentic development in this project.
 
 - Prefer `type` aliases over `interface`.
 - Keep TypeScript type definitions consistent with the ESLint `@typescript-eslint/consistent-type-definitions` rule configured for `type`.
+- Do not use explicit `any` in TypeScript. Prefer `unknown` and narrow the type at usage sites.

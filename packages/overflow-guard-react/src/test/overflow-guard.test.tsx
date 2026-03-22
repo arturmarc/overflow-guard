@@ -1,13 +1,9 @@
-import { cleanup, render } from '@testing-library/react'
+import { cleanup, render, within } from '@testing-library/react'
 import { act } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import {
-  OverflowGuard,
-  resolveOverflowAxis,
-  shouldUseFallback,
-  useOverflowGuard,
-} from '@/components/overflow-guard'
+import { resolveOverflowAxis, shouldUseFallback } from '../utils'
+import { OverflowGuard, useOverflowGuard } from '../index'
 
 type ResizeCallbackSize = {
   width?: number
@@ -36,7 +32,7 @@ function setMeasurementBoxSize(size: {
   scrollHeight: number
 }) {
   const measurementBox = document.querySelector<HTMLDivElement>(
-    '[data-overflow-guard="measurement-box"]',
+    '[data-overflow-guard="hidden-measurement-box"]',
   )
 
   if (!measurementBox) {
@@ -105,7 +101,7 @@ describe('OverflowGuard component', () => {
   })
 
   it('renders fallback when horizontal overflow matches fallbackOn', () => {
-    const { getByText, queryByText } = render(
+    const { getByText } = render(
       <OverflowGuard fallback={<div>compact</div>} fallbackOn="horizontal">
         <div>primary</div>
       </OverflowGuard>,
@@ -119,12 +115,14 @@ describe('OverflowGuard component', () => {
     })
     triggerResize()
 
-    expect(getVisibleLayer()).toContainElement(getByText('compact'))
-    expect(queryByText('primary')).not.toBeInTheDocument()
+    const visibleLayer = getVisibleLayer()
+
+    expect(visibleLayer).toContainElement(getByText('compact'))
+    expect(within(visibleLayer).queryByText('primary')).not.toBeInTheDocument()
   })
 
   it('keeps primary content when overflow is only vertical but fallbackOn is horizontal', () => {
-    const { getByText, queryByText } = render(
+    const { queryByText } = render(
       <OverflowGuard fallback={<div>compact</div>} fallbackOn="horizontal">
         <div>primary</div>
       </OverflowGuard>,
@@ -138,7 +136,9 @@ describe('OverflowGuard component', () => {
     })
     triggerResize()
 
-    expect(getVisibleLayer()).toContainElement(getByText('primary'))
+    const visibleLayer = getVisibleLayer()
+
+    expect(visibleLayer).toContainElement(within(visibleLayer).getByText('primary'))
     expect(queryByText('compact')).not.toBeInTheDocument()
   })
 

@@ -1,4 +1,4 @@
-import { OverflowGuard } from '@/components/overflow-guard'
+import { OverflowGuard } from '../index'
 
 export function validFallbackUsage() {
   return (

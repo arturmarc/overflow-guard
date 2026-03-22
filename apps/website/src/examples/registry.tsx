@@ -23,9 +23,9 @@ import {
 import {
   OverflowGuard,
   useOverflowGuard,
-} from '@/components/overflow-guard'
+} from 'overflow-guard-react'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 
 export type ExampleDefinition = {
   id: string
@@ -588,7 +588,7 @@ export const demoStats = [
   { label: 'Previews', value: 'all live' },
 ]
 
-export const heroCode = String.raw`import { OverflowGuard } from "@overflow-guard/react"
+export const heroCode = String.raw`import { OverflowGuard } from "overflow-guard-react"
 
 <OverflowGuard>
   {(isOverflowing) => (
