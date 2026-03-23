@@ -1,7 +1,7 @@
 {
   "name": "overflow-guard-react",
-  "version": "0.0.0",
-  "description": "React components and hooks for switching UI when content overflows its available space.",
+  "version": "0.0.1",
+  "description": "React component and hook for content-aware responsive UI that adapts when content stops fitting, without breakpoints or magic numbers.",
   "license": "MIT",
   "author": "Artur Marczyk",
   "repository": {
@@ -17,11 +17,20 @@
     "react",
     "overflow",
     "responsive",
+    "content-aware",
+    "content-aware-ui",
+    "responsive-ui",
+    "adaptive-ui",
     "layout",
-    "ui",
     "toolbar",
-    "truncate",
-    "resize-observer"
+    "navigation",
+    "menu",
+    "dynamic-content",
+    "localization",
+    "resize-observer",
+    "render-props",
+    "hook",
+    "truncate"
   ],
   "type": "module",
   "main": "./dist/index.cjs",

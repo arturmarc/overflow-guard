@@ -1,35 +1,40 @@
 <p align="center">
-  <img src="../../docs/assets/overflow-guard-logo.svg" alt="Overflow Guard logo" width="88" />
+  <img src="https://raw.githubusercontent.com/arturmarc/overflow-guard/main/docs/assets/overflow-guard-logo.svg" alt="Overflow Guard logo" width="88" />
 </p>
 
 # overflow-guard-react
 
-![Overflow Guard demo](../../docs/assets/overflow-guard-demo.gif)
+![Overflow Guard demo](https://raw.githubusercontent.com/arturmarc/overflow-guard/main/docs/assets/overflow-guard-demo.gif)
 
-`overflow-guard-react` lets components react to their actual content size instead of viewport or container breakpoints.
+`overflow-guard-react` helps React UI adapt when content stops fitting, instead of relying on viewport breakpoints, container breakpoints, or magic numbers.
 
 Repository: <https://github.com/arturmarc/overflow-guard>
 Website: <https://overflow-guard.vercel.app/>
 
-Wrap a piece of UI in `<OverflowGuard>`, and it tells you when the content stops fitting. You can then swap layouts, collapse actions, reveal a "Read more" affordance, or render a completely different fallback tree.
+Wrap a piece of UI in `<OverflowGuard>`, and it tells you when content no longer fits the available space. You can then switch to a compact layout, collapse actions to icons, swap a full nav for a menu, or reveal a "Read more" affordance.
 
 ## Why use it
 
-- React to content, not guessed pixel values
-- Handle dynamic labels, localization, and user-generated content
-- Reuse the same component in narrow sidebars, wide panels, and resizable layouts
-- Support horizontal overflow, vertical overflow, or both
+- Build around content, not guessed pixel values
+- Handle dynamic labels, localization, and data-driven content
+- Reuse the same component across narrow sidebars, wide panels, and resizable layouts
+- Respond to horizontal overflow, vertical overflow, or both
 
 ## Installation
 
 ```sh
 bun add overflow-guard-react
+npm install overflow-guard-react
+pnpm add overflow-guard-react
+yarn add overflow-guard-react
 ```
 
 Peer dependencies:
 
 - `react`
 - `react-dom`
+
+`overflow-guard-react` is a client-side package. It measures rendered DOM with `ResizeObserver`, so use it from client components in frameworks that distinguish server and client rendering.
 
 ## Quick start
 
