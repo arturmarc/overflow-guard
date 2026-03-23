@@ -242,7 +242,12 @@ export function MenuFallbackExample() {
         </div>
         OverflowGuard
       </div>
-      <Button aria-label="Open menu" size="icon" variant="outline">
+      <Button
+        aria-label="Open menu"
+        className="size-9"
+        size="icon"
+        variant="outline"
+      >
         <Menu />
       </Button>
     </nav>
@@ -252,6 +257,9 @@ export function MenuFallbackExample() {
 }
 
 export function ReadMoreExample() {
+  // const isOverflowing = false;
+  // const overflowAxis = 'none';
+  // const showReadMore = false;
   return (
     <OverflowGuard className="h-full" containerClassName='h-full'>
       {(isOverflowing, overflowAxis) => {
@@ -259,9 +267,14 @@ export function ReadMoreExample() {
           overflowAxis === 'vertical' || overflowAxis === 'both'
 
         return (
-          <article className="flex min-h-full flex-col rounded-[1.6rem] border bg-card p-10 shadow-sm">
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <div>
+          <article
+            className={cn(
+              'flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.6rem] border bg-card p-10 shadow-sm',
+              isOverflowing && 'h-full',
+            )}
+          >
+            <div className="mb-3 flex shrink-0 items-center justify-between gap-3">
+              <div className="min-w-0">
                 <div className="text-sm font-semibold">Release notes draft</div>
                 <div className="text-xs text-muted-foreground">
                   Height overflow reveals a call to action.
@@ -272,12 +285,9 @@ export function ReadMoreExample() {
                 overflowAxis={overflowAxis}
               />
             </div>
-            <div className="relative flex-1">
+            <div className="relative min-h-0 min-w-0 flex-1">
               <p
-                className={cn(
-                  'pr-2 text-sm leading-6 text-muted-foreground',
-                  showReadMore && 'max-h-24 overflow-hidden',
-                )}
+                className="h-full overflow-hidden pr-2 text-sm leading-6 text-muted-foreground"
               >
                 OverflowGuard can be used for more than horizontal button rows.
                 This example keeps a fixed-height card and measures whether the
@@ -292,12 +302,12 @@ export function ReadMoreExample() {
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card via-card/90 to-transparent" />
               ) : null}
             </div>
-            <div className="mt-4 flex items-center justify-between">
+            <div className="mt-4 flex shrink-0 min-w-0 items-center justify-between gap-3">
               <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 Vertical handling
               </span>
               {showReadMore ? (
-                <Button size="sm">
+                <Button className="shrink-0" size="sm">
                   Read more
                   <ArrowRight />
                 </Button>
@@ -484,7 +494,7 @@ export const exampleRegistry: ExampleDefinition[] = [
   fallback={
     <nav className="flex items-center justify-between rounded-3xl border bg-card px-4 py-3">
       <Brand />
-      <Button size="icon" variant="outline" aria-label="Open menu">
+      <Button className="size-9" size="icon" variant="outline" aria-label="Open menu">
         <Menu />
       </Button>
     </nav>
@@ -516,8 +526,13 @@ export const exampleRegistry: ExampleDefinition[] = [
       overflowAxis === "vertical" || overflowAxis === "both"
 
     return (
-      <article className="flex h-full min-h-max flex-col rounded-3xl border bg-card p-5">
-        <div className={showReadMore ? "max-h-24 overflow-hidden" : ""}>
+      <article
+        className={cn(
+          "flex min-h-0 flex-col overflow-hidden rounded-3xl border bg-card p-5",
+          isOverflowing && "h-full",
+        )}
+      >
+        <div className="min-h-0 flex-1 overflow-hidden">
           <LongArticleCopy />
         </div>
         {showReadMore ? <Button size="sm">Read more</Button> : null}

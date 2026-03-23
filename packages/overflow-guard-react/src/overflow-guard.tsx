@@ -125,10 +125,6 @@ export function OverflowGuard(props: OverflowGuardProps) {
     [measurementObservedRef, scheduleOverflowCheck],
   )
 
-  useEffect(() => {
-    scheduleOverflowCheck()
-  }, [scheduleOverflowCheck])
-
   useLayoutEffect(() => {
     checkOverflow()
   })

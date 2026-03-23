@@ -3,70 +3,57 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/*
- * Font: change the import and --font-sans value below to switch.
- * Options (install via npm i @fontsource-variable/<name>):
- *   "Space Grotesk"        — @fontsource-variable/space-grotesk
- *   "Geist Variable"       — @fontsource-variable/geist
- *   "Outfit"               — @fontsource-variable/outfit
- *   "Sora"                 — @fontsource-variable/sora
- *   "Bricolage Grotesque"  — @fontsource-variable/bricolage-grotesque
- */
-@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.985 0.006 95);
-  --foreground: oklch(0.24 0.02 240);
-  --card: oklch(0.995 0.003 95);
-  --card-foreground: oklch(0.24 0.02 240);
-  --popover: oklch(0.995 0.003 95);
-  --popover-foreground: oklch(0.24 0.02 240);
-  --primary: oklch(0.52 0.11 31);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.93 0.02 85);
-  --secondary-foreground: oklch(0.3 0.02 240);
-  --muted: oklch(0.95 0.015 95);
-  --muted-foreground: oklch(0.52 0.015 240);
-  --accent: oklch(0.89 0.04 72);
-  --accent-foreground: oklch(0.28 0.02 240);
+  --background: oklch(0.98 0.005 65);
+  --foreground: oklch(0.15 0.01 50);
+  --card: oklch(0.96 0.005 65);
+  --card-foreground: oklch(0.15 0.01 50);
+  --popover: oklch(0.98 0.005 65);
+  --popover-foreground: oklch(0.15 0.01 50);
+  --primary: oklch(0.55 0.14 40);
+  --primary-foreground: oklch(0.98 0.005 65);
+  --secondary: oklch(0.94 0.01 65);
+  --secondary-foreground: oklch(0.2 0.01 50);
+  --muted: oklch(0.95 0.005 65);
+  --muted-foreground: oklch(0.45 0.01 50);
+  --accent: oklch(0.92 0.01 65);
+  --accent-foreground: oklch(0.2 0.01 50);
   --destructive: oklch(0.58 0.2 26);
-  --border: oklch(0.87 0.015 90);
-  --input: oklch(0.91 0.01 90);
-  --ring: oklch(0.68 0.09 35);
-  --radius: 1rem;
+  --border: oklch(0.9 0.005 65);
+  --input: oklch(0.92 0.005 65);
+  --ring: oklch(0.55 0.14 40);
+  --radius: 0.875rem;
 }
 
-/*
- * Color scheme: "Plum" (hue ~300)
- * Alternatives tried: Midnight (hue 265), Ember (hue 55), Forest (hue 160), Rose (hue 350)
- * To switch, rotate the hue values across all properties below.
- */
 .dark {
-  --background: oklch(0.17 0.035 300);
-  --foreground: oklch(0.95 0.012 300);
-  --card: oklch(0.21 0.035 300);
-  --card-foreground: oklch(0.95 0.012 300);
-  --popover: oklch(0.195 0.035 300);
-  --popover-foreground: oklch(0.95 0.012 300);
-  --primary: oklch(0.72 0.18 310);
-  --primary-foreground: oklch(0.17 0.035 300);
-  --secondary: oklch(0.275 0.025 300);
-  --secondary-foreground: oklch(0.95 0.012 300);
-  --muted: oklch(0.255 0.025 300);
-  --muted-foreground: oklch(0.78 0.02 290);
-  --accent: oklch(0.325 0.03 300);
-  --accent-foreground: oklch(0.95 0.012 300);
-  --destructive: oklch(0.68 0.19 25);
-  --border: oklch(0.315 0.03 300);
-  --input: oklch(0.295 0.025 300);
-  --ring: oklch(0.65 0.18 310);
+  --background: oklch(0.14 0.005 50);
+  --foreground: oklch(0.93 0.012 80);
+  --card: oklch(0.19 0.007 50);
+  --card-foreground: oklch(0.93 0.012 80);
+  --popover: oklch(0.17 0.006 50);
+  --popover-foreground: oklch(0.93 0.012 80);
+  --primary: oklch(0.72 0.14 42);
+  --primary-foreground: oklch(0.14 0.005 50);
+  --secondary: oklch(0.25 0.008 50);
+  --secondary-foreground: oklch(0.93 0.012 80);
+  --muted: oklch(0.25 0.006 50);
+  --muted-foreground: oklch(0.68 0.012 60);
+  --accent: oklch(0.28 0.008 50);
+  --accent-foreground: oklch(0.93 0.012 80);
+  --destructive: oklch(0.65 0.19 25);
+  --border: oklch(0.34 0.01 50);
+  --input: oklch(0.27 0.006 50);
+  --ring: oklch(0.72 0.14 42);
 }
 
 @theme inline {
-  /* Must match the @fontsource import above */
-  --font-sans: "Space Grotesk", sans-serif;
+  --font-sans: "Geist Variable", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -113,8 +100,8 @@
 
   .dark body {
     background-image: radial-gradient(
-      ellipse at top,
-      color-mix(in srgb, var(--color-primary) 8%, transparent) 0,
+      ellipse at 50% -8%,
+      color-mix(in srgb, var(--color-primary) 7%, transparent) 0%,
       transparent 55%
     );
   }
@@ -125,10 +112,10 @@
   }
 
   :not(pre) > code {
-    border-radius: 0.5rem;
-    background-color: color-mix(in srgb, black 6%, white);
-    font-size: 0.9em;
-    padding: 0.125rem 0.375rem;
+    border-radius: 0.375rem;
+    background-color: color-mix(in srgb, black 5%, white);
+    font-size: 0.875em;
+    padding: 0.1em 0.375em;
   }
 
   .dark :not(pre) > code {
@@ -144,15 +131,54 @@
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.7s ease both;
+  }
+}
+
 @layer components {
+  .demo-preview::-webkit-resizer {
+    background: transparent;
+  }
+
   input[type="range"].demo-slider {
     -webkit-appearance: none;
     appearance: none;
-    height: 6px;
+    height: 5px;
     border-radius: 9999px;
-    background: color-mix(in srgb, white 12%, transparent);
+    background: color-mix(in srgb, white 16%, transparent);
     cursor: pointer;
     outline: none;
+    transition: background 0.15s;
+  }
+
+  input[type="range"].demo-slider:hover {
+    background: color-mix(in srgb, white 22%, transparent);
   }
 
   input[type="range"].demo-slider::-webkit-slider-thumb {
@@ -162,9 +188,17 @@
     height: 20px;
     border-radius: 9999px;
     background: var(--color-primary);
+    border: 2.5px solid var(--color-background);
     cursor: grab;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
-    transition: transform 0.15s;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
+  }
+
+  input[type="range"].demo-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.12);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
   }
 
   input[type="range"].demo-slider::-webkit-slider-thumb:active {
@@ -175,12 +209,18 @@
   input[type="range"].demo-slider::-moz-range-thumb {
     width: 20px;
     height: 20px;
-    border: 0;
+    border: 2.5px solid var(--color-background);
     border-radius: 9999px;
     background: var(--color-primary);
     cursor: grab;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
-    transition: transform 0.15s;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
+  }
+
+  input[type="range"].demo-slider::-moz-range-thumb:hover {
+    transform: scale(1.12);
   }
 
   input[type="range"].demo-slider::-moz-range-thumb:active {

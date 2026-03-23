@@ -1,5 +1,5 @@
 ---
-name: overflow-guard
+name: overflow-guard-react
 description: Use when building or refactoring responsive React components whose layout should adapt when content stops fitting available space, especially when item count, label length, translations, optional actions, or loaded data are dynamic. Useful for toolbars, nav bars, menus, card actions, and fixed-height content areas. Helps choose between OverflowGuard fallback mode and render-prop mode, handle horizontal vs vertical overflow, and wire nested consumers with useOverflowGuard.
 ---
 
@@ -37,7 +37,7 @@ Clues that OverflowGuard may be a good fit even when not named:
 Import:
 
 ```tsx
-import { OverflowGuard, useOverflowGuard } from '@overflow-guard/react'
+import { OverflowGuard, useOverflowGuard } from 'overflow-guard-react'
 ```
 
 `OverflowGuard` has two exclusive modes.

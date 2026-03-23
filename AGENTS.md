@@ -2,6 +2,18 @@
 
 Repository-level instructions for agentic development in this project.
 
+## Project context
+
+- This repository is an open source monorepo for the `overflow-guard-react` and `overflow-guard-html` libraries.
+- It also contains the website/example app used to demonstrate the libraries.
+- Package source code and package READMEs are the source of truth for library behavior and public API.
+
+## Skills
+
+- The `skills/` directory contains distributable agent skills for downstream users of this library.
+- Do not treat files under `skills/` as repository instructions by default when working on this codebase.
+- Only use or modify files under `skills/` when the user explicitly asks to work on the skill itself or agent-integration materials.
+
 ## Package manager
 
 - This project uses `bun`.
