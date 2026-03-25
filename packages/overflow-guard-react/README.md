@@ -29,11 +29,6 @@ pnpm add overflow-guard-react
 yarn add overflow-guard-react
 ```
 
-Peer dependencies:
-
-- `react`
-- `react-dom`
-
 `overflow-guard-react` is a client-side package. It measures rendered DOM with `ResizeObserver`, so use it from client components in frameworks that distinguish server and client rendering.
 
 ## Quick start
