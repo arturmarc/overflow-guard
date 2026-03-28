@@ -27,6 +27,7 @@
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "lucide-react": "^0.577.0",
+        "overflow-guard-html": "workspace:*",
         "overflow-guard-react": "workspace:*",
         "radix-ui": "^1.4.3",
         "react": "^19.2.0",
@@ -48,11 +49,18 @@
     },
     "packages/overflow-guard-html": {
       "name": "overflow-guard-html",
-      "version": "0.0.0",
+      "version": "0.0.1",
+      "devDependencies": {
+        "@types/node": "^24.10.1",
+        "jsdom": "^28.1.0",
+        "typescript": "~5.9.3",
+        "vite": "^8.0.0-beta.13",
+        "vitest": "^4.0.18",
+      },
     },
     "packages/overflow-guard-react": {
       "name": "overflow-guard-react",
-      "version": "0.0.0",
+      "version": "0.0.1",
       "dependencies": {
         "use-resize-observer": "^9.1.0",
       },

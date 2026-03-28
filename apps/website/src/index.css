@@ -166,6 +166,179 @@
     background: transparent;
   }
 
+  .html-demo-stack {
+    @apply flex min-w-0 flex-col gap-3;
+  }
+
+  .html-demo-stack-full {
+    @apply h-full;
+  }
+
+  .html-demo-grow {
+    @apply block h-full min-h-0;
+  }
+
+  .html-demo-header {
+    @apply flex items-center justify-between gap-3;
+  }
+
+  .html-demo-row-static {
+    @apply min-w-0 shrink-0;
+  }
+
+  .html-demo-copy {
+    @apply flex min-w-0 flex-col gap-1.5;
+  }
+
+  .html-demo-title {
+    @apply text-sm font-semibold;
+  }
+
+  .html-demo-subtle {
+    @apply text-xs text-muted-foreground;
+    line-height: 1.5;
+  }
+
+  .html-demo-subtle-caps {
+    @apply uppercase tracking-[0.2em];
+  }
+
+  .html-demo-pill {
+    @apply inline-flex items-center rounded-full border border-border bg-background px-2 py-1 text-xs font-medium whitespace-nowrap text-muted-foreground;
+  }
+
+  .html-demo-pill-primary {
+    @apply border-primary/30 bg-primary/10 text-primary;
+  }
+
+  .html-demo-toggle,
+  .html-demo-button,
+  .html-demo-icon-button {
+    @apply border border-border bg-card text-foreground;
+    flex-shrink: 0;
+    font: inherit;
+    line-height: 1;
+  }
+
+  .html-demo-button {
+    @apply inline-flex h-8 items-center gap-1.5 rounded-lg px-2.5 text-sm font-medium;
+  }
+
+  .html-demo-toggle,
+  .html-demo-read-more-cta {
+    @apply h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem];
+  }
+
+  .html-demo-icon-button {
+    @apply inline-flex size-8 items-center justify-center rounded-lg p-0;
+  }
+
+  .html-demo-button-primary {
+    @apply border-primary/40 bg-primary text-primary-foreground;
+  }
+
+  .html-demo-toolbar-shell {
+    @apply flex min-w-max gap-2 rounded-[1.4rem] border bg-card p-2 shadow-sm;
+  }
+
+  .html-demo-toolbar-shell-wrap {
+    @apply flex-wrap;
+  }
+
+  .html-demo-toolbar-summary {
+    @apply flex items-center gap-3 rounded-[1rem] bg-muted/70 px-3 py-3;
+    flex-shrink: 0;
+  }
+
+  .html-demo-toolbar-icon {
+    @apply rounded-full bg-primary/12 p-2 text-primary;
+  }
+
+  .html-demo-toolbar-label,
+  .html-demo-brand {
+    @apply text-sm font-semibold whitespace-nowrap;
+  }
+
+  .html-demo-toolbar-actions,
+  .html-demo-toolbar-actions-compact {
+    @apply flex items-center gap-2;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .html-demo-toolbar-actions {
+    @apply justify-center;
+  }
+
+  .html-demo-toolbar-actions-compact {
+    @apply justify-end;
+  }
+
+  .html-demo-nav {
+    @apply flex min-w-max items-center justify-between gap-3 rounded-[1.4rem] border bg-card px-4 py-3;
+  }
+
+  .html-demo-brand {
+    @apply flex items-center gap-2 text-sm font-semibold;
+  }
+
+  .html-demo-nav-links {
+    @apply flex items-center gap-2 pl-2 text-sm;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+  }
+
+  .html-demo-nav-links a {
+    @apply shrink-0 rounded-full px-3 py-2 text-muted-foreground no-underline;
+  }
+
+  .html-demo-card {
+    @apply relative flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.6rem] border bg-card p-10 shadow-sm;
+  }
+
+  .html-demo-card-content {
+    @apply relative min-h-0 min-w-0 flex-1;
+  }
+
+  .html-demo-body {
+    @apply h-full min-h-0 overflow-hidden pr-2 text-sm text-muted-foreground;
+    line-height: 1.5;
+  }
+
+  .html-demo-body-clamped {
+    max-height: 8.8rem;
+  }
+
+  .html-demo-fade {
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 4rem;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-card) 0%, transparent) 0%,
+      color-mix(in srgb, var(--color-card) 85%, transparent) 40%,
+      var(--color-card) 100%
+    );
+  }
+
+  .html-demo-footer {
+    @apply mt-4 flex items-center justify-between gap-3;
+  }
+
+  .html-demo-read-more-placeholder {
+    @apply inline-flex items-center text-xs text-muted-foreground;
+    min-height: 2.5rem;
+  }
+
+  .html-demo-button svg,
+  .html-demo-icon-button svg,
+  .html-demo-toolbar-icon svg {
+    @apply size-4 shrink-0;
+  }
+
   input[type="range"].demo-slider {
     -webkit-appearance: none;
     appearance: none;

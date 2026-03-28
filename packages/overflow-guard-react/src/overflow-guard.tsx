@@ -11,7 +11,7 @@ import {
 } from 'react'
 import useResizeObserver from 'use-resize-observer'
 
-import { resolveOverflowAxis, shouldUseFallback, throttle } from './utils'
+import { throttle } from './utils'
 
 const DEFAULT_THROTTLE_TIME = 0
 const LOOP_TIME_WINDOW = 300
@@ -73,7 +73,16 @@ export function OverflowGuard(props: OverflowGuardProps) {
     useState<OverflowAxis>('none')
   const [locked, setLocked] = useState(false)
 
-  const domProps = getDomProps(props)
+  const domProps = { ...props } as Record<string, unknown>
+
+  delete domProps.children
+  delete domProps.className
+  delete domProps.containerClassName
+  delete domProps.containerStyle
+  delete domProps.fallback
+  delete domProps.fallbackOn
+  delete domProps.style
+  delete domProps.throttleTime
 
   const checkOverflow = useCallback(() => {
     const measurementBox = measurementBoxRef.current
@@ -88,10 +97,14 @@ export function OverflowGuard(props: OverflowGuardProps) {
       measurementBox.scrollHeight > measurementBox.clientHeight + 1
 
     setMeasuredOverflowAxis((currentAxis) => {
-      const nextAxis = resolveOverflowAxis(
-        horizontalOverflow,
-        verticalOverflow,
-      )
+      const nextAxis =
+        horizontalOverflow && verticalOverflow
+          ? 'both'
+          : horizontalOverflow
+            ? 'horizontal'
+            : verticalOverflow
+              ? 'vertical'
+              : 'none'
 
       return currentAxis === nextAxis ? currentAxis : nextAxis
     })
@@ -170,7 +183,11 @@ export function OverflowGuard(props: OverflowGuardProps) {
 
   const fallbackOn = 'fallback' in props ? (props.fallbackOn ?? 'both') : 'both'
   const shouldRenderFallback =
-    'fallback' in props && shouldUseFallback(fallbackOn, overflowAxis)
+    'fallback' in props &&
+    overflowAxis !== 'none' &&
+    (fallbackOn === 'both' ||
+      overflowAxis === fallbackOn ||
+      overflowAxis === 'both')
 
   const visibleChildren =
     typeof children === 'function'
@@ -236,19 +253,4 @@ export function OverflowGuard(props: OverflowGuardProps) {
       </div>
     </div>
   )
-}
-
-function getDomProps(props: OverflowGuardProps): HTMLAttributes<HTMLDivElement> {
-  const domProps = { ...props } as Record<string, unknown>
-
-  delete domProps.children
-  delete domProps.className
-  delete domProps.containerClassName
-  delete domProps.containerStyle
-  delete domProps.fallback
-  delete domProps.fallbackOn
-  delete domProps.style
-  delete domProps.throttleTime
-
-  return domProps as HTMLAttributes<HTMLDivElement>
 }

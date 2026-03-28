@@ -2,7 +2,6 @@ import { cleanup, render, within } from '@testing-library/react'
 import { act } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { resolveOverflowAxis, shouldUseFallback } from '../utils'
 import { OverflowGuard, useOverflowGuard } from '../index'
 
 type ResizeCallbackSize = {
@@ -66,22 +65,6 @@ function getVisibleLayer() {
 
   return visibleLayer
 }
-
-describe('OverflowGuard helpers', () => {
-  it('resolves overflow axis combinations', () => {
-    expect(resolveOverflowAxis(false, false)).toBe('none')
-    expect(resolveOverflowAxis(true, false)).toBe('horizontal')
-    expect(resolveOverflowAxis(false, true)).toBe('vertical')
-    expect(resolveOverflowAxis(true, true)).toBe('both')
-  })
-
-  it('matches fallback activation to the selected axis', () => {
-    expect(shouldUseFallback('both', 'horizontal')).toBe(true)
-    expect(shouldUseFallback('horizontal', 'vertical')).toBe(false)
-    expect(shouldUseFallback('vertical', 'horizontal')).toBe(false)
-    expect(shouldUseFallback('horizontal', 'both')).toBe(true)
-  })
-})
 
 describe('OverflowGuard component', () => {
   beforeEach(() => {

@@ -9,6 +9,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      'overflow-guard-html': path.resolve(
+        __dirname,
+        '../../packages/overflow-guard-html/src/index.ts',
+      ),
       'overflow-guard-react': path.resolve(
         __dirname,
         '../../packages/overflow-guard-react/src/index.ts',

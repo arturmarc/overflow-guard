@@ -27,13 +27,17 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "bun run build:react && bun run build:website",
+    "build": "bun run build:react && bun run build:html && bun run build:website",
+    "build:html": "cd packages/overflow-guard-html && bun run build",
     "build:react": "cd packages/overflow-guard-react && bun run build",
     "build:website": "cd apps/website && bun run build",
     "dev": "cd apps/website && bun run dev",
-    "test": "cd packages/overflow-guard-react && bun run test",
-    "lint": "bunx eslint packages/overflow-guard-react apps/website",
-    "typecheck": "bun run typecheck:react && bun run typecheck:website",
+    "test": "bun run test:react && bun run test:html",
+    "test:html": "cd packages/overflow-guard-html && bun run test",
+    "test:react": "cd packages/overflow-guard-react && bun run test",
+    "lint": "bunx eslint packages/overflow-guard-react packages/overflow-guard-html apps/website",
+    "typecheck": "bun run typecheck:react && bun run typecheck:html && bun run typecheck:website",
+    "typecheck:html": "cd packages/overflow-guard-html && bun run typecheck",
     "typecheck:react": "cd packages/overflow-guard-react && bun run typecheck",
     "typecheck:website": "cd apps/website && bun run typecheck"
   },

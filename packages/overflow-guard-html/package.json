@@ -1,7 +1,9 @@
 {
   "name": "overflow-guard-html",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "Custom element for content-aware responsive UI that adapts when content stops fitting, without breakpoints or magic numbers.",
+  "license": "MIT",
+  "author": "Artur Marczyk",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arturmarc/overflow-guard.git",
@@ -11,5 +13,48 @@
   "bugs": {
     "url": "https://github.com/arturmarc/overflow-guard/issues"
   },
-  "type": "module"
+  "keywords": [
+    "html",
+    "web-components",
+    "custom-element",
+    "overflow",
+    "responsive",
+    "content-aware",
+    "layout",
+    "toolbar",
+    "navigation",
+    "menu",
+    "resize-observer"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "jsdom": "^28.1.0",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.0-beta.13",
+    "vitest": "^4.0.18"
+  }
 }

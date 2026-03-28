@@ -1,5 +1,31 @@
 {
   "installCommand": "bun install",
   "buildCommand": "bun run build:website",
-  "outputDirectory": "apps/website/dist"
+  "outputDirectory": "apps/website/dist",
+  "rewrites": [
+    {
+      "source": "/dev",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/dev/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/html",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/html/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/react",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/react/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

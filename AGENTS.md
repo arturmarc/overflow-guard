@@ -37,3 +37,8 @@ Repository-level instructions for agentic development in this project.
 - Prefer `type` aliases over `interface`.
 - Keep TypeScript type definitions consistent with the ESLint `@typescript-eslint/consistent-type-definitions` rule configured for `type`.
 - Do not use explicit `any` in TypeScript. Prefer `unknown` and narrow the type at usage sites.
+- Treat explicit function and getter return types as banned by default.
+- Only add an explicit return type when it is genuinely necessary, such as for type predicates, `never`, overloads, or a public API boundary where inference is unclear or unstable.
+- Strongly prefer not naming local TypeScript types when the shape can be expressed with inference, `typeof`, indexed access, `ReturnType`, `Parameters`, or another built-in utility type.
+- Do not introduce named local type aliases for simple one-off unions or shapes unless the type is reused enough to earn a name.
+- Do not extract trivial helper functions when they have a single call site. Inline the logic at the use site unless extraction materially improves readability or reuse.
