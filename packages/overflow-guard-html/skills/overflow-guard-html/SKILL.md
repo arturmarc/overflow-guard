@@ -21,12 +21,25 @@ Do not reach for it first when:
 
 ## Public API
 
-Importing `overflow-guard-html` registers the custom element automatically.
+`overflow-guard-html` can be used in two installation styles:
+
+- install the package in an app with a bundler: `bun add overflow-guard-html`
+- load it directly on a plain HTML page with `<script src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0"></script>`
+
+Importing or loading `overflow-guard-html` registers the custom element automatically.
+
+Bundled app usage:
 
 ```html
 <script type="module">
   import 'overflow-guard-html'
 </script>
+```
+
+Raw HTML usage:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0"></script>
 ```
 
 Wrap exactly one primary child element:
