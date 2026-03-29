@@ -51,10 +51,10 @@ export default function ReactPage() {
           </div>
 
           <div className="grid w-full max-w-2xl gap-5 text-left md:grid-cols-2">
-            <InstallCard label="Install" command="npm i overflow-guard-react" />
+            <InstallCard label="Install" command="bun add overflow-guard-react" />
             <InstallCard
               label="Agent skill"
-              command="npx skills add https://github.com/arturmarc/overflow-guard --skill overflow-guard-react"
+              command="npx skills add https://github.com/arturmarc/overflow-guard/tree/main/packages/overflow-guard-react --skill overflow-guard-react"
             />
           </div>
         </section>

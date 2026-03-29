@@ -15,6 +15,18 @@ pnpm add overflow-guard-html
 yarn add overflow-guard-html
 ```
 
+## AI agents
+
+The recommended path for AI-assisted usage is TanStack Intent. This package ships its own skill so agent guidance can stay aligned with the installed package version.
+
+After installing the package, run:
+
+```sh
+npx @tanstack/intent@latest list
+```
+
+Standalone skill installer ecosystems can still be supported separately, but TanStack Intent is the canonical path for this package.
+
 ## Quick start
 
 Use `fallbackClass` when you want the same content tree to adapt in place.

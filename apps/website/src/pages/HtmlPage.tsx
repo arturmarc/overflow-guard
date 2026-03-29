@@ -56,7 +56,10 @@ export default function HtmlPage() {
 
           <div className="grid w-full max-w-2xl gap-5 text-left md:grid-cols-2">
             <InstallCard label="Install" command="bun add overflow-guard-html" />
-            <InstallCard label="Import" command="import 'overflow-guard-html'" />
+            <InstallCard
+              label="Agent skill"
+              command="npx skills add https://github.com/arturmarc/overflow-guard/tree/main/packages/overflow-guard-html --skill overflow-guard-html"
+            />
           </div>
         </section>
 

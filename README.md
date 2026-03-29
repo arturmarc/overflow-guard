@@ -30,6 +30,14 @@
 - Reuse the same UI across narrow sidebars, wide panels, and resizable layouts
 - Respond to horizontal overflow, vertical overflow, or both
 
+## AI usage
+
+The recommended AI integration path is TanStack Intent.
+
+- `overflow-guard-react` and `overflow-guard-html` ship their own package-local skills so the guidance can stay aligned with the installed library version.
+- If you use a standalone skill installer ecosystem, you can still keep separate compatibility skills, but TanStack Intent is the canonical path for this repo.
+- After installing a package, use `npx @tanstack/intent@latest list` to discover available skills in your project.
+
 ## React docs
 
 Full docs: [`packages/overflow-guard-react/README.md`](./packages/overflow-guard-react/README.md)

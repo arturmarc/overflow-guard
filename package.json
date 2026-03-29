@@ -35,6 +35,8 @@
     "test": "bun run test:react && bun run test:html",
     "test:html": "cd packages/overflow-guard-html && bun run test",
     "test:react": "cd packages/overflow-guard-react && bun run test",
+    "intent:stale": "bunx intent stale packages/overflow-guard-react && bunx intent stale packages/overflow-guard-html",
+    "intent:validate": "bunx intent validate packages/overflow-guard-react/skills && bunx intent validate packages/overflow-guard-html/skills",
     "lint": "bunx eslint packages/overflow-guard-react packages/overflow-guard-html apps/website",
     "typecheck": "bun run typecheck:react && bun run typecheck:html && bun run typecheck:website",
     "typecheck:html": "cd packages/overflow-guard-html && bun run typecheck",
@@ -43,6 +45,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@tanstack/intent": "^0.0.27",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
