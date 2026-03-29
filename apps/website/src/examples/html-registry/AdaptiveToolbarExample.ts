@@ -89,7 +89,6 @@ export const adaptiveToolbarHtmlExample: HtmlExampleDefinition = {
   </div>
 
   <overflow-guard
-    check-only="horizontal"
     fallbackClass="html-demo-toolbar-fallback"
     data-demo-toolbar
   >

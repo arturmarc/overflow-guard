@@ -9,7 +9,7 @@ export const readMoreHtmlExample: HtmlExampleDefinition = {
     'The card body, fade, and CTA all switch through `fallbackClass` on the visible article.',
   heightClass: 'h-80',
   setup: (container) => bindStatus(container, '[data-demo-read-more]'),
-  markup: String.raw`<overflow-guard data-demo-read-more check-only="vertical" fallbackClass="html-demo-card-fallback" class="h-full min-h-0">
+  markup: String.raw`<overflow-guard data-demo-read-more fallbackClass="html-demo-card-fallback" class="h-full min-h-0">
     <article class="html-demo-card [&_.html-demo-read-more-cta]:hidden [&_.html-demo-fade]:hidden [&.html-demo-card-fallback]:h-full [&.html-demo-card-fallback_.html-demo-read-more-cta]:inline-flex [&.html-demo-card-fallback_.html-demo-fade]:block [&.html-demo-card-fallback_.html-demo-read-more-placeholder]:hidden">
       <div class="html-demo-header html-demo-row-static">
         <div class="html-demo-copy">

@@ -39,7 +39,6 @@ export const menuFallbackHtmlExample: HtmlExampleDefinition = {
 
   <overflow-guard
     data-demo-menu
-    check-only="horizontal"
     fallbackClass="html-demo-menu-fallback"
   >
     <nav class="html-demo-menu-shell flex min-w-max items-center justify-between gap-3 rounded-[1.4rem] border bg-card px-4 py-3">

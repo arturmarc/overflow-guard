@@ -38,7 +38,7 @@ Use `fallbackClass` when you want the same content tree to adapt in place.
   }
 </style>
 
-<overflow-guard check-only="horizontal" fallbackClass="toolbar--compact">
+<overflow-guard fallbackClass="toolbar--compact">
   <nav class="toolbar">
     <span>Sprint planning</span>
     <div>
@@ -67,7 +67,6 @@ When fallback mode becomes active, the class from `fallbackClass` is added to th
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `check-only` | `horizontal \| vertical` | - | Optional axis filter. When omitted, the element checks both axes and any overflow can activate fallback rendering. |
 | `fallbackClass` | string | - | Class name(s) added to the primary child element while fallback mode is active. |
 
 HTML attribute names are case-insensitive, so `fallbackClass`, `fallbackclass`, and `fallback-class` are all accepted.
@@ -112,5 +111,6 @@ guard?.refresh()
 - Importing `overflow-guard-html` registers `<overflow-guard>` automatically.
 - The element uses `ResizeObserver`, so it should run in the browser.
 - Named fallback slots are not supported. Use `fallbackClass` instead.
+- `check-only` is an optional extra attribute for limiting checks to `horizontal` or `vertical` when you need axis-specific behavior.
 
 Repository: <https://github.com/arturmarc/overflow-guard>

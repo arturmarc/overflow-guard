@@ -124,7 +124,7 @@ yarn add overflow-guard-html
   }
 </style>
 
-<overflow-guard check-only="horizontal" fallbackClass="toolbar--compact">
+<overflow-guard fallbackClass="toolbar--compact">
   <nav class="toolbar">
     <span>Sprint planning</span>
     <div>
