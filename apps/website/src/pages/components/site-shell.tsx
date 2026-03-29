@@ -66,9 +66,11 @@ export function SiteHeader({ activeMode }: { activeMode: SiteMode }) {
 export function InstallCard({
   label,
   command,
+  prefix = '$',
 }: {
   label: string
   command: string
+  prefix?: string
 }) {
   const [copied, setCopied] = useState(false)
 
@@ -85,7 +87,7 @@ export function InstallCard({
       </span>
       <div className="group flex min-w-0 items-center gap-3 rounded-xl border border-border bg-card/60 px-4 py-3 backdrop-blur-sm">
         <span className="shrink-0 font-mono text-sm text-muted-foreground select-none">
-          $
+          {prefix}
         </span>
         <code
           className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap font-mono text-sm text-foreground/80"

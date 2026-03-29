@@ -1,6 +1,8 @@
 import {
+  htmlBundleCode,
   htmlHeroCode,
   htmlHomeExamples,
+  htmlModuleCode,
 } from '@/examples/html-registry/html-home-examples'
 import { HtmlExampleRender } from '@/examples/html-registry/common/render'
 import {
@@ -57,9 +59,14 @@ export default function HtmlPage() {
           <div className="grid w-full max-w-2xl gap-5 text-left md:grid-cols-2">
             <InstallCard label="Install" command="bun add overflow-guard-html" />
             <InstallCard
-              label="Agent skill"
-              command="npx skills add https://github.com/arturmarc/overflow-guard/tree/main/packages/overflow-guard-html --skill overflow-guard-html"
+              label="CDN bundle"
+              command={htmlBundleCode}
+              prefix=""
             />
+          </div>
+
+          <div className="grid w-full max-w-2xl gap-5 text-left">
+            <InstallCard label="CDN module" command={htmlModuleCode} prefix="" />
           </div>
         </section>
 
@@ -115,6 +122,26 @@ export default function HtmlPage() {
 
         <section className="flex flex-col gap-5">
           <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+            Use it your way
+          </h2>
+          <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground">
+            Start with the npm package in apps that already bundle JavaScript.
+            For CMS embeds, prototypes, Astro content pages, and other no-build
+            setups, use the CDN paths directly. The root jsDelivr URL serves
+            the browser bundle and registers the element automatically.
+          </p>
+          <div className="grid gap-5 md:grid-cols-2">
+            <pre className="overflow-x-auto rounded-2xl border border-border bg-card/60 p-6 font-mono text-sm leading-7 text-foreground/85">
+              <code>{htmlBundleCode}</code>
+            </pre>
+            <pre className="overflow-x-auto rounded-2xl border border-border bg-card/60 p-6 font-mono text-sm leading-7 text-foreground/85">
+              <code>{htmlModuleCode}</code>
+            </pre>
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-5">
+          <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
             Quick start
           </h2>
           <pre className="overflow-x-auto rounded-2xl border border-border bg-card/60 p-6 font-mono text-sm leading-7 text-foreground/85">
@@ -122,7 +149,7 @@ export default function HtmlPage() {
           </pre>
         </section>
 
-        <SiteFooter pills={['Custom element', 'Framework-agnostic', 'ResizeObserver', 'CSS-first fallbacks']} />
+        <SiteFooter pills={['Custom element', 'Framework-agnostic', 'CDN-ready', 'CSS-first fallbacks']} />
       </main>
     </div>
   )

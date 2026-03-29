@@ -15,9 +15,14 @@ export const htmlHomeExamples = [
 
 export const htmlDevExample = adaptiveToolbarHtmlExample
 
-export const htmlHeroCode = String.raw`<script type="module">
-  import 'overflow-guard-html'
-</script>
+export const htmlBundleCode = String.raw`<script src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0"></script>`
+
+export const htmlModuleCode = String.raw`<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0/dist/index.js"
+></script>`
+
+export const htmlHeroCode = String.raw`${htmlBundleCode}
 
 <style>
   .toolbar .icon-action {

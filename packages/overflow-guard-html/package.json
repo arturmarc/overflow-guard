@@ -1,6 +1,6 @@
 {
   "name": "overflow-guard-html",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Custom element for content-aware responsive UI that adapts when content stops fitting, without breakpoints or magic numbers.",
   "license": "MIT",
   "author": "Artur Marczyk",
@@ -30,6 +30,8 @@
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
+  "unpkg": "./dist/overflow-guard.min.js",
+  "jsdelivr": "./dist/overflow-guard.min.js",
   "types": "./dist/index.d.ts",
   "sideEffects": true,
   "publishConfig": {

@@ -15,6 +15,40 @@ pnpm add overflow-guard-html
 yarn add overflow-guard-html
 ```
 
+## CDN and raw HTML
+
+`overflow-guard-html` supports two browser-first paths:
+
+- Use the npm package when your app already has a bundler or build step.
+- Use a CDN script when you want to drop the element into plain HTML, a CMS embed, a prototype, or another no-build page.
+
+### Browser bundle
+
+The simplest no-build path is the browser bundle. It auto-registers `<overflow-guard>` and is suitable for plain `<script>` usage.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0"></script>
+```
+
+UNPKG can serve the same bundle:
+
+```html
+<script src="https://unpkg.com/overflow-guard-html@0"></script>
+```
+
+### ES module from a CDN
+
+If you prefer module scripts in the browser, load the ESM build directly:
+
+```html
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0/dist/index.js"
+></script>
+```
+
+For production sites, prefer pinning an exact version instead of a moving major tag.
+
 ## AI agents
 
 The recommended path for AI-assisted usage is TanStack Intent. This package ships its own skill so agent guidance can stay aligned with the installed package version.
@@ -32,9 +66,7 @@ Standalone skill installer ecosystems can still be supported separately, but Tan
 Use `fallbackClass` when you want the same content tree to adapt in place.
 
 ```html
-<script type="module">
-  import 'overflow-guard-html'
-</script>
+<script src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0"></script>
 
 <style>
   .toolbar .icon-action {
@@ -121,6 +153,7 @@ guard?.refresh()
 ## Notes
 
 - Importing `overflow-guard-html` registers `<overflow-guard>` automatically.
+- The browser bundle from jsDelivr or UNPKG also registers `<overflow-guard>` automatically.
 - The element uses `ResizeObserver`, so it should run in the browser.
 - Named fallback slots are not supported. Use `fallbackClass` instead.
 - `check-only` is an optional extra attribute for limiting checks to `horizontal` or `vertical` when you need axis-specific behavior.

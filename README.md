@@ -111,12 +111,27 @@ pnpm add overflow-guard-html
 yarn add overflow-guard-html
 ```
 
+### CDN and raw HTML
+
+For no-build pages, prototypes, embeds, or CMS usage, you can load the browser bundle directly from a CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0"></script>
+```
+
+If you prefer a module script instead, load the ESM file directly:
+
+```html
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0/dist/index.js"
+></script>
+```
+
 ### Quick start
 
 ```html
-<script type="module">
-  import "overflow-guard-html";
-</script>
+<script src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0"></script>
 
 <style>
   .toolbar .icon-action {

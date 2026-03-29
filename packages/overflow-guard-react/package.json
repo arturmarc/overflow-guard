@@ -1,6 +1,6 @@
 {
   "name": "overflow-guard-react",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "React component and hook for content-aware responsive UI that adapts when content stops fitting, without breakpoints or magic numbers.",
   "license": "MIT",
   "author": "Artur Marczyk",
