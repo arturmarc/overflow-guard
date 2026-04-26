@@ -351,13 +351,24 @@ export class OverflowGuardElement extends HTMLElement {
       return;
     }
 
-    this.measuredOverflowAxis = nextAxis;
-
     const shouldApplyFallbackState =
       nextAxis !== "none" &&
       (this.checkOnly === null ||
         nextAxis === this.checkOnly ||
         nextAxis === "both");
+    const nextAppliedState = shouldApplyFallbackState ? "fallback" : "primary";
+
+    if (
+      nextAxis === this.measuredOverflowAxis &&
+      shouldApplyFallbackState === this.fallbackChangesApplied &&
+      this.getAttribute("data-overflow-guard-state-applied") ===
+        nextAppliedState &&
+      this.getAttribute("overflow-axis") === nextAxis
+    ) {
+      return;
+    }
+
+    this.measuredOverflowAxis = nextAxis;
 
     if (shouldApplyFallbackState && !this.fallbackChangesApplied) {
       this.applyFallbackChange(true);
@@ -367,10 +378,7 @@ export class OverflowGuardElement extends HTMLElement {
       this.applyFallbackChange(false);
     }
 
-    this.setAttribute(
-      "data-overflow-guard-state-applied",
-      shouldApplyFallbackState ? "fallback" : "primary"
-    );
+    this.setAttribute("data-overflow-guard-state-applied", nextAppliedState);
     this.reflectState();
   }
 

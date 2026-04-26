@@ -1,6 +1,6 @@
 {
   "name": "overflow-guard-html",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Custom element for content-aware responsive UI that adapts when content stops fitting, without breakpoints or magic numbers.",
   "license": "MIT",
   "author": "Artur Marczyk",

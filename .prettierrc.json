@@ -1,0 +1,32 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": [
+        "packages/overflow-guard-html/src/overflow-guard.ts",
+        "packages/overflow-guard-html/src/reverse-mutations.ts"
+      ],
+      "options": {
+        "semi": true,
+        "singleQuote": false,
+        "trailingComma": "es5"
+      }
+    },
+    {
+      "files": "apps/website/src/components/ui/**/*.{ts,tsx}",
+      "options": {
+        "singleQuote": false,
+        "trailingComma": "es5"
+      }
+    }
+  ]
+}

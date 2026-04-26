@@ -20,35 +20,35 @@ function GitHubIcon() {
 export function SiteHeader({ activeMode }: { activeMode: SiteMode }) {
   return (
     <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 pt-8 md:px-10 md:pt-12">
-      <a href="/" className="flex items-center gap-3">
-        <img
-          src="/favicon.svg"
-          alt="Overflow Guard logo"
-          className="h-8 w-8 shrink-0"
-        />
-        <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3">
+          <img
+            src="/favicon.svg"
+            alt="Overflow Guard logo"
+            className="h-8 w-8 shrink-0"
+          />
           <span className="font-display text-lg font-semibold tracking-tight">
             OverflowGuard
           </span>
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            {activeMode === 'react' ? (
-              <span className="text-foreground">React</span>
-            ) : (
-              <a href="/react" className="transition hover:text-foreground">
-                React
-              </a>
-            )}
-            <span>/</span>
-            {activeMode === 'html' ? (
-              <span className="text-foreground">HTML</span>
-            ) : (
-              <a href="/html" className="transition hover:text-foreground">
-                HTML
-              </a>
-            )}
-          </div>
+        </a>
+        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          {activeMode === 'react' ? (
+            <span className="text-foreground">React</span>
+          ) : (
+            <a href="/react" className="transition hover:text-foreground">
+              React
+            </a>
+          )}
+          <span>/</span>
+          {activeMode === 'html' ? (
+            <span className="text-foreground">HTML</span>
+          ) : (
+            <a href="/html" className="transition hover:text-foreground">
+              HTML
+            </a>
+          )}
         </div>
-      </a>
+      </div>
       <a
         href="https://github.com/arturmarc/overflow-guard"
         className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition hover:bg-accent hover:text-foreground"
