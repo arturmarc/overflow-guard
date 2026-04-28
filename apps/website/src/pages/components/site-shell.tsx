@@ -3,7 +3,7 @@ import { ArrowUpRight, Check, Copy } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
-export type SiteMode = 'react' | 'html'
+export type SiteMode = 'react' | 'html' | 'article'
 
 function GitHubIcon() {
   return (
@@ -45,6 +45,14 @@ export function SiteHeader({ activeMode }: { activeMode: SiteMode }) {
           ) : (
             <a href="/html" className="transition hover:text-foreground">
               HTML
+            </a>
+          )}
+          <span>/</span>
+          {activeMode === 'article' ? (
+            <span className="text-foreground">Article</span>
+          ) : (
+            <a href="/article" className="transition hover:text-foreground">
+              Article
             </a>
           )}
         </div>
