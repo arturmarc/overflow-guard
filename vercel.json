@@ -26,6 +26,14 @@
     {
       "source": "/react/(.*)",
       "destination": "/index.html"
+    },
+    {
+      "source": "/responsive-toolbars-and-navbars-done-right",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/responsive-toolbars-and-navbars-done-right/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
