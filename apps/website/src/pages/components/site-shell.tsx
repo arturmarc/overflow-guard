@@ -51,7 +51,10 @@ export function SiteHeader({ activeMode }: { activeMode: SiteMode }) {
           {activeMode === 'article' ? (
             <span className="text-foreground">Article</span>
           ) : (
-            <a href="/article" className="transition hover:text-foreground">
+            <a
+              href="/responsive-toolbars-and-navbars-done-right"
+              className="transition hover:text-foreground"
+            >
               Article
             </a>
           )}

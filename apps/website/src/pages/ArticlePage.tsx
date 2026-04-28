@@ -6,7 +6,7 @@ import cloudflareGerman from '@/assets/cloudflare-toolbar-ger.png'
 import cloudflarePolish from '@/assets/cloudflare-toolbar-pl.png'
 import googleNavbarOverflow from '@/assets/google-site-navbar-overflow-example.png'
 import openAiNavbarOverflow from '@/assets/openAI-navbar-overflow.png'
-import { SiteFooter, SiteHeader } from './components/site-shell'
+import { InstallCard, SiteFooter, SiteHeader } from './components/site-shell'
 
 function ExternalLink({
   children,
@@ -58,6 +58,7 @@ function ArticleSection({
   )
 }
 
+// Keep article copy aligned with docs/article.md, which is the canonical draft.
 export default function ArticlePage() {
   return (
     <div className="min-h-screen">
@@ -78,14 +79,14 @@ export default function ArticlePage() {
             <p>
               Responsive design is basically solved nowadays, right? We&apos;ve
               been doing media queries for over a decade, we have{' '}
-              <code>@container</code> queries now and cool tricks like CSS
-              Grid&apos;s <code>repeat(auto-fit, minmax())</code>.
+              <code>@container</code> queries now, and we have cool tricks like
+              CSS Grid&apos;s <code>repeat(auto-fit, minmax())</code>.
             </p>
             <p>
-              All this works pretty well for the most part, especially when
-              things are static, but if you are dealing with dynamic content
-              that&apos;s when things can get less than perfect 😅. It&apos;s
-              especially easy with toolbars, even for the pros:
+              All this works pretty well, especially when things are static. But
+              if you are dealing with dynamic content, things can still get less
+              than perfect 😅. It&apos;s especially easy to trip over toolbars,
+              even for the pros:
             </p>
           </ArticleSection>
 
@@ -134,9 +135,9 @@ export default function ArticlePage() {
               <figure className="flex flex-col gap-4 rounded-2xl border border-border bg-card/60 p-4 md:p-5">
                 <figcaption className="text-lg leading-relaxed text-muted-foreground">
                   <ExternalLink href="https://developers.openai.com/api/doc">
-                    OpenAI docs at below 820px wide
+                    OpenAI docs below 820px wide
                   </ExternalLink>{' '}
-                  even not dynamic just breaks 🤮
+                  are not even dynamic, and still break 🤮
                 </figcaption>
                 <ArticleImage
                   src={openAiNavbarOverflow}
@@ -148,15 +149,18 @@ export default function ArticlePage() {
 
           <section className="flex flex-col gap-5 text-lg leading-relaxed text-muted-foreground">
             <p>
-              This happens because you can&apos;t solve this when there is
-              dynamic content in pure CSS, where you have to rely on fixed pixel
-              breakpoints. To solve it correctly, you&apos;re gonna need some
+              This happens because you can&apos;t really solve this when there
+              is dynamic content using pure CSS, where you have to rely on fixed
+              pixel breakpoints.
+            </p>
+            <p>
+              To solve it correctly and robustly, you&apos;re gonna need some
               JS, or smart tools 🤓
             </p>
             <p>
-              The way to fix all of those is to have a way to detect when those
-              navbars overflow. It&apos;s actually not that difficult and a
-              competent AI agent can whip out some{' '}
+              The way to fix all of those is to detect when those navbars
+              overflow. It&apos;s actually not that difficult, and a competent
+              AI agent can whip up some{' '}
               <ExternalLink href="https://codepen.io/arturmarc/pen/JoRaaqP">
                 HTML+JS
               </ExternalLink>{' '}
@@ -170,7 +174,7 @@ export default function ArticlePage() {
 
           <ArticleSection title="OverflowGuard to the rescue 🛟">
             <p>
-              And you can stop here and call it a day I guess 🤷‍♂️. But we can
+              And you can stop here and call it a day, I guess 🤷‍♂️. But we can
               make this even easier by using a smart tool:{' '}
               <strong className="font-semibold text-foreground">
                 OverflowGuard
@@ -181,7 +185,7 @@ export default function ArticlePage() {
               It does exactly what it says on the tin 🏷️: it detects overflow
               and lets you swap in alternative styles or content.
             </p>
-            <p>It has two flavours:</p>
+            <p>It has two flavors:</p>
             <ul className="flex list-disc flex-col gap-4 pl-6">
               <li>
                 <strong className="font-semibold text-foreground">
@@ -190,9 +194,9 @@ export default function ArticlePage() {
                   </ExternalLink>
                 </strong>
                 : a custom element, useful when doing vanilla HTML or using
-                frameworks like Astro, see{' '}
+                frameworks like Astro. See{' '}
                 <ExternalLink href="https://codepen.io/arturmarc/pen/gbwdBgG">
-                  how the above example working using that
+                  the same example built with it
                 </ExternalLink>{' '}
                 (notice no JS anymore 😉)
               </li>
@@ -202,7 +206,7 @@ export default function ArticlePage() {
                     React component
                   </ExternalLink>
                 </strong>
-                : makes it trivial to adopt this kind of responsiveness as you
+                : makes it trivial to adopt this kind of responsiveness, as you
                 can see in the{' '}
                 <ExternalLink href="https://stackblitz.com/edit/responive-navbar-react-overflow-guard?file=src%2FResponsiveNav.tsx">
                   adjusted React example
@@ -219,8 +223,8 @@ export default function ArticlePage() {
             <p>
               That&apos;s a useful way to keep a toolbar compact when horizontal
               space gets tight. Toolbars with buttons are notoriously dynamic
-              (privileges, translations, context) so it&apos;s sometimes
-              impossible to find good hard coded breakpoints.
+              (translations, permissions, other context), so it&apos;s sometimes
+              impossible to find good hard-coded breakpoints.
             </p>
             <ArticleImage
               src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nqkvwg798wxjl4hkktw7.gif"
@@ -240,14 +244,13 @@ export default function ArticlePage() {
 
           <ArticleSection title='"Read more..."'>
             <p>
-              Let&apos;s not limit ourselves to the horizontal, Overflow Guard
+              Let&apos;s not limit ourselves to the horizontal. OverflowGuard
               works perfectly well in the vertical ↕️ direction. Here&apos;s
-              something you might want to do, have a max height on a box and
-              show a &quot;read more&quot; button if the content inside
-              overflows.
+              something you might want to do: set a max height on a box and show
+              a &quot;read more&quot; button if the content inside overflows.
             </p>
             <p>
-              Again easily doable in{' '}
+              Again, this is easily doable in{' '}
               <ExternalLink href="https://codepen.io/arturmarc/pen/zxKgXra">
                 HTML
               </ExternalLink>{' '}
@@ -265,16 +268,16 @@ export default function ArticlePage() {
 
           <ArticleSection title='A "greedy nav" 🧭 🍽️'>
             <p>
-              Leaving the best for last: A robust pattern that&apos;s good for
-              dynamic navbars called &quot;greedy nav&quot; which you can find
-              for example on another{' '}
+              Leaving the best for last: a robust pattern for dynamic navbars
+              called &quot;greedy nav&quot;, which you can find, for example, on
+              another{' '}
               <ExternalLink href="https://developer.chrome.com/">
                 Google page
               </ExternalLink>{' '}
               that actually works correctly 😉.
             </p>
             <p>
-              You can nest OverflowGuard so it&apos;s quite easy to use it to
+              You can nest OverflowGuard, so it&apos;s quite easy to use it to
               build a greedy nav, especially in{' '}
               <ExternalLink href="https://stackblitz.com/edit/vitejs-vite-ydwytwhk?file=src%2FApp.tsx">
                 React
@@ -286,8 +289,8 @@ export default function ArticlePage() {
               <ExternalLink href="https://codepen.io/arturmarc/pen/bNwXJXY">
                 raw HTML
               </ExternalLink>{' '}
-              too, if you&apos;re ok with all the extra nesting 😅 (notably
-              still accessible), or adding{' '}
+              too, if you&apos;re OK with all the extra nesting 😅 (still
+              accessible, notably), or by adding{' '}
               <ExternalLink href="https://codepen.io/arturmarc/pen/dPpxEgR">
                 some extra JS
               </ExternalLink>
@@ -303,12 +306,46 @@ export default function ArticlePage() {
                   OverflowGuard
                 </ExternalLink>
               </strong>{' '}
-              in your toolbag I am sure it will unlock some cool tricks 🪄 you
+              in your toolbag, I am sure it will unlock some cool tricks 🪄 you
               never thought could be so easy to implement. Also mention it to
-              your designers 🎨. They tend to work in fixed breakpoints 🙄, but
-              with this capability they can lean into more fluid and content
-              driven design.
+              your designers 🎨. They often work in fixed breakpoints 🙄, but
+              with this capability they can lean into more fluid and
+              content-driven design.
             </p>
+          </ArticleSection>
+
+          <ArticleSection title="Ways to get started">
+            <div className="grid gap-4 md:grid-cols-2">
+              <InstallCard
+                label="React component"
+                command="bun add overflow-guard-react"
+              />
+              <InstallCard
+                label="Custom element"
+                command="bun add overflow-guard-html"
+              />
+            </div>
+            <div className="grid gap-4">
+              <InstallCard
+                label="Script tag"
+                command='<script src="https://cdn.jsdelivr.net/npm/overflow-guard-html@0"></script>'
+                prefix=""
+              />
+            </div>
+            <p>
+              If you want your AI agent to know how to use the library, install
+              the package-specific skill too:
+            </p>
+            <div className="grid gap-4">
+              <InstallCard
+                label="React skill"
+                command="npx skills add https://github.com/arturmarc/overflow-guard/tree/main/packages/overflow-guard-react --skill overflow-guard-react"
+              />
+              <InstallCard
+                label="HTML skill"
+                command="npx skills add https://github.com/arturmarc/overflow-guard/tree/main/packages/overflow-guard-html --skill overflow-guard-html"
+              />
+            </div>
           </ArticleSection>
         </article>
 

@@ -6,6 +6,7 @@ import ArticlePage from './pages/ArticlePage'
 import ReactPage from './pages/ReactPage'
 
 const articleTitle = 'OverflowGuard — Build around content, not breakpoints'
+const articlePath = '/responsive-toolbars-and-navbars-done-right'
 
 function getRoute(pathname: string) {
   if (pathname.startsWith('/dev')) {
@@ -22,10 +23,7 @@ function getRoute(pathname: string) {
     }
   }
 
-  if (
-    pathname.startsWith('/article') ||
-    pathname.startsWith('/responsive-toolbars-and-navbars')
-  ) {
+  if (pathname.startsWith('/article') || pathname.startsWith(articlePath)) {
     return {
       title: articleTitle,
       page: <ArticlePage />,
