@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react'
-import { ArrowUpRight, Check, Copy } from 'lucide-react'
+import { ArrowUpRight, Check, Copy, Menu } from 'lucide-react'
+import { OverflowGuard } from 'overflow-guard-react'
 
 import { Button } from '@/components/ui/button'
 
@@ -17,60 +18,128 @@ function GitHubIcon() {
   )
 }
 
+function HeaderBrand() {
+  return (
+    <a href="/" className="flex min-w-0 items-center gap-3">
+      <img
+        src="/favicon.svg"
+        alt="Overflow Guard logo"
+        className="h-8 w-8 shrink-0"
+      />
+      <span className="truncate font-display text-lg font-semibold tracking-tight">
+        OverflowGuard
+      </span>
+    </a>
+  )
+}
+
+function HeaderLinks({ activeMode }: { activeMode: SiteMode }) {
+  return (
+    <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+      {activeMode === 'react' ? (
+        <span className="text-foreground">React</span>
+      ) : (
+        <a href="/react" className="transition hover:text-foreground">
+          React
+        </a>
+      )}
+      <span>/</span>
+      {activeMode === 'html' ? (
+        <span className="text-foreground">HTML</span>
+      ) : (
+        <a href="/html" className="transition hover:text-foreground">
+          HTML
+        </a>
+      )}
+      <span>/</span>
+      {activeMode === 'article' ? (
+        <span className="text-foreground">Article</span>
+      ) : (
+        <a
+          href="/responsive-toolbars-and-navbars-done-right"
+          className="transition hover:text-foreground"
+        >
+          Article
+        </a>
+      )}
+    </div>
+  )
+}
+
+function GitHubLink({ compact = false }: { compact?: boolean }) {
+  return (
+    <a
+      href="https://github.com/arturmarc/overflow-guard"
+      className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition hover:bg-accent hover:text-foreground"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <GitHubIcon />
+      <span className={compact ? '' : 'hidden sm:inline'}>GitHub</span>
+      <ArrowUpRight className={compact ? 'h-3.5 w-3.5' : 'hidden h-3.5 w-3.5 sm:block'} />
+    </a>
+  )
+}
+
+function CompactHeader({ activeMode }: { activeMode: SiteMode }) {
+  return (
+    <nav className="flex min-w-0 items-center justify-between gap-3">
+      <HeaderBrand />
+      <details className="group relative shrink-0">
+        <summary className="flex h-10 w-10 list-none items-center justify-center rounded-lg text-muted-foreground transition hover:bg-accent hover:text-foreground [&::-webkit-details-marker]:hidden">
+          <Menu className="h-5 w-5" />
+          <span className="sr-only">Open navigation</span>
+        </summary>
+        <div className="absolute right-0 z-20 mt-2 flex min-w-44 flex-col gap-1 rounded-lg border border-border bg-popover p-2 text-popover-foreground shadow-xl">
+          <a
+            href="/react"
+            className="rounded-md px-3 py-2 text-sm transition hover:bg-accent"
+            aria-current={activeMode === 'react' ? 'page' : undefined}
+          >
+            React
+          </a>
+          <a
+            href="/html"
+            className="rounded-md px-3 py-2 text-sm transition hover:bg-accent"
+            aria-current={activeMode === 'html' ? 'page' : undefined}
+          >
+            HTML
+          </a>
+          <a
+            href="/responsive-toolbars-and-navbars-done-right"
+            className="rounded-md px-3 py-2 text-sm transition hover:bg-accent"
+            aria-current={activeMode === 'article' ? 'page' : undefined}
+          >
+            Article
+          </a>
+          <div className="my-1 border-t border-border" />
+          <GitHubLink compact />
+        </div>
+      </details>
+    </nav>
+  )
+}
+
 export function SiteHeader({ activeMode }: { activeMode: SiteMode }) {
   return (
-    <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 pt-8 md:px-10 md:pt-12">
-      <div className="flex items-center gap-3">
-        <a href="/" className="flex items-center gap-3">
-          <img
-            src="/favicon.svg"
-            alt="Overflow Guard logo"
-            className="h-8 w-8 shrink-0"
-          />
-          <span className="font-display text-lg font-semibold tracking-tight">
-            OverflowGuard
-          </span>
-        </a>
-        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          {activeMode === 'react' ? (
-            <span className="text-foreground">React</span>
-          ) : (
-            <a href="/react" className="transition hover:text-foreground">
-              React
-            </a>
-          )}
-          <span>/</span>
-          {activeMode === 'html' ? (
-            <span className="text-foreground">HTML</span>
-          ) : (
-            <a href="/html" className="transition hover:text-foreground">
-              HTML
-            </a>
-          )}
-          <span>/</span>
-          {activeMode === 'article' ? (
-            <span className="text-foreground">Article</span>
-          ) : (
-            <a
-              href="/responsive-toolbars-and-navbars-done-right"
-              className="transition hover:text-foreground"
-            >
-              Article
-            </a>
-          )}
-        </div>
-      </div>
-      <a
-        href="https://github.com/arturmarc/overflow-guard"
-        className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition hover:bg-accent hover:text-foreground"
-        target="_blank"
-        rel="noopener noreferrer"
+    <div className="mx-auto max-w-5xl px-6 pt-8 md:px-10 md:pt-12">
+      <OverflowGuard
+        className="w-full"
+        fallback={<CompactHeader activeMode={activeMode} />}
+        fallbackOn="horizontal"
       >
-        <GitHubIcon />
-        <span className="hidden sm:inline">GitHub</span>
-        <ArrowUpRight className="hidden h-3.5 w-3.5 sm:block" />
-      </a>
-    </nav>
+        <nav
+          className="flex min-w-max min-h-10 items-center justify-between gap-5"
+          aria-label="Site navigation"
+        >
+          <div className="flex items-center gap-3">
+            <HeaderBrand />
+            <HeaderLinks activeMode={activeMode} />
+          </div>
+          <GitHubLink />
+        </nav>
+      </OverflowGuard>
+    </div>
   )
 }
 
